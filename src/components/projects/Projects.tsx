@@ -29,21 +29,29 @@ export const Projects = () => {
       live: "#"
     },
     {
-      title: "Phylogenetic Analysis",
-      description: "Projeto de bioinformática para análise de árvores filogenéticas usando BLAST e MEGA12.",
-      tags: ["Bioinfo", "Data Science", "MEGA12"],
-      image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1000&auto=format&fit=crop", // Placeholder Science
-      github: "#",
+      title: "EduTech - Backend",
+      description: "Simulação de backend para plataforma educacional, focada em automação de processos com Python e modelagem de banco de dados PostgreSQL.",
+      tags: ["Python", "PostgreSQL", "Backend", "Automação"],
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop", // Imagem mais voltada para tecnologia/educação
+      github: "https://github.com/mulinco/edutech",
       live: "#"
     },
     {
-      title: "Phylogenetic Analysis",
-      description: "Projeto de bioinformática para análise de árvores filogenéticas usando BLAST e MEGA12.",
-      tags: ["Bioinfo", "Data Science", "MEGA12"],
-      image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1000&auto=format&fit=crop", // Placeholder Science
-      github: "#",
-      live: "#"
-    }
+      title: "EduTech - Frontend",
+      description: "Interface responsiva e interativa desenvolvida para a plataforma EduTech do Instituto Consuelo, facilitando a gestão educacional e a visualização de dados em tempo real.",
+      tags: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+      image: "public/edutech-frontend.png", 
+      github: "https://github.com/Edutech-Instituto-Consuelo/frontend",
+      live: "https://plataforma-instituto-consuelo.vercel.app/" 
+    },
+    {
+    title: "Netflix Genre Analysis",
+    description: "Análise exploratória de dados (EDA) do catálogo da Netflix para identificar tendências de gêneros e padrões de lançamento ao longo dos anos.",
+    tags: ["Python", "Pandas", "Matplotlib", "Data Viz"],
+    image: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=1000&auto=format&fit=crop", // Placeholder Netflix
+    github: "https://github.com/mulinco/analysis-genre-netflix",
+    live: "#"
+}
 
   ];
 

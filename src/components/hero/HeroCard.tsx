@@ -41,7 +41,7 @@ export const HeroCard = ({ fact, currentIcon, onTriggerSecret }: HeroCardProps) 
           src="/foto-light.png" 
           alt="Kawaii Persona" 
           className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 z-20 hidden kawaii:block scale-90 hover:scale-95 origin-bottom" 
-          style={{ filter: 'url(#thick-border) drop-shadow(0 10px 15px rgba(0,0,0,0.3))' }}
+          style={{ filter: 'url(#thick-border) drop-shadow(0 10px 15px rgba(255, 255, 255, 0.85))' }}
         />
 
         {/* CAMADA 4: OVERLAY SECRETO */}

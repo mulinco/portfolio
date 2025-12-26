@@ -1,27 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 import plugin from 'tailwindcss/plugin';
+
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  // Habilita a troca de classe manual (para nosso toggle funcionar)
   darkMode: 'class', 
   theme: {
     extend: {
       keyframes: {
         'sticker-slap': {
-          '0%': { 
-            opacity: '0', 
-            transform: 'scale(1.5) rotate(0deg)' // Começa grande e reto
-          },
-          '60%': { 
-            opacity: '1', 
-            transform: 'scale(0.95) rotate(-8deg)' // "Bate" na superfície e comprime um pouco
-          },
-          '100%': { 
-            transform: 'scale(1) rotate(-6deg)' // Assenta na posição final
-          },
+          '0%': { opacity: '0', transform: 'scale(1.5) rotate(0deg)' },
+          '60%': { opacity: '1', transform: 'scale(0.95) rotate(-8deg)' },
+          '100%': { transform: 'scale(1) rotate(-6deg)' },
         },
         'card-appear': {
              '0%': { opacity: '0', transform: 'translateY(20px) scale(0.95)' },
@@ -29,29 +21,33 @@ export default {
         }
       },
       animation: {
-        'sticker-slap': 'sticker-slap 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards', // O cubic-bezier dá o efeito de "pulo"
+        'sticker-slap': 'sticker-slap 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         'card-appear': 'card-appear 0.8s ease-out forwards'
       },
       colors: {
-        // Cores SEMÂNTICAS (mudam conforme o tema)
+        /* Unificando com as variáveis do seu index.css */
         bg: {
-          DEFAULT: 'var(--color-bg)',      // Fundo principal
-          card: 'var(--color-card)',       // Fundo dos cards/elementos
+          primary: 'var(--bg-primary)',
+          secondary: 'var(--bg-secondary)',
         },
         text: {
-          main: 'var(--color-text-main)',  // Texto principal
-          muted: 'var(--color-text-muted)', // Texto secundário
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
         },
         accent: {
-          DEFAULT: 'var(--color-accent)',  // A cor de destaque principal
-          secondary: 'var(--color-accent-secondary)',
+          DEFAULT: 'var(--accent)',
+          hover: 'var(--accent-hover)',
         }
       },
       fontFamily: {
-        // Mantivemos suas fontes e adicionei uma 'cute' pro modo Kawaii
+        /* A MÁGICA ESTÁ AQUI: */
+        /* O Tailwind agora lê as variáveis que o index.css troca automaticamente */
+        heading: ['var(--font-heading)', 'serif'],
+        body: ['var(--font-body)', 'sans-serif'],
+        mono: ['var(--font-code)', 'monospace'],
+        
+        // Mantive os nomes antigos caso você ainda os use em algum lugar:
         metal: ['UnifrakturMaguntia', 'cursive'], 
-        code: ['Space Mono', 'monospace'],
-        sans: ['Inter', 'sans-serif'],
         cute: ['"Mochiy Pop One"', 'sans-serif'],
       },
       backgroundImage: {
@@ -61,8 +57,8 @@ export default {
   },
   plugins: [
     plugin(function({ addVariant }) {
-      // Cria a variante 'kawaii:' que ativa quando a classe .kawaii está no body
       addVariant('kawaii', 'body.kawaii &')
     })
   ],
 }
+

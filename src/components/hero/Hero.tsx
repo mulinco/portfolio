@@ -1,10 +1,9 @@
 // src/components/Hero.tsx
-import { useTypewriter } from '../hooks/useTypewriter';
-import { useEasterEgg } from '../hooks/useEasterEgg';
-// Note o caminho './hero/...' pois o Hero.tsx está fora da pasta 'hero'
-import { HeroBackground } from './hero/HeroBackground';
-import { HeroText } from './hero/HeroText';
-import { HeroCard } from './hero/HeroCard';
+import { useTypewriter } from '../../hooks/useTypewriter'; 
+import { useEasterEgg } from '../../hooks/useEasterEgg';
+import { HeroBackground } from './HeroBackground';
+import { HeroText } from './HeroText';
+import { HeroCard } from './HeroCard';
 
 export const Hero = () => {
   // 1. Hooks de Lógica

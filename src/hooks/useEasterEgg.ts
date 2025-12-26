@@ -1,6 +1,5 @@
-import { useState, ReactNode } from 'react';
-// Importe os ícones aqui se precisar, ou passe como argumento, 
-// mas para simplificar vou deixar a estrutura de dados aqui.
+import type { ReactNode } from 'react';
+import { useState } from 'react';
 import { Telescope, Dna, Heart, Sparkles, Gamepad2, MessageCircle, SpellCheck } from 'lucide-react';
 
 export const useEasterEgg = () => {

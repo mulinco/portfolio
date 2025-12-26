@@ -7,7 +7,7 @@
 
 @layer base {
   
-  /* --- MODO GOTH (Padrão - Intocado) --- */
+  /* --- MODO GOTH (Padrão) --- */
   :root {
     --bg-primary: #0f0505;
     --bg-secondary: #1a0b0b;
@@ -17,106 +17,86 @@
     --accent-hover: #ff4d6d;
     --scroll-track: #0f0505;
     --scroll-thumb: #520815;
+
+    /* VARIÁVEIS DE FONTE GOTH */
+    --font-heading: 'UnifrakturMaguntia', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-code: 'Fira Code', monospace;
   }
 
-  /* --- MODO KAWAII (Vibe "Dreamy/Ethereal" Atualizada) --- */
+  /* --- MODO KAWAII --- */
   .kawaii {
-    /* Ajustei levemente para um tom mais creme/rosado como base */
     --bg-primary: #fff5f7;      
-    /* Cards brancos com uma transparência leve para o fundo passar */
     --bg-secondary: rgba(255, 255, 255, 0.8);    
-    
-    --text-primary: #5c4b51; /* Um marrom rosado suave em vez de cinza */
+    --text-primary: #5c4b51; 
     --text-secondary: #988288;
-    
-    --accent: #FF9EB5;          /* Um rosa mais suave e quente, menos "choque" */
+    --accent: #FF9EB5;          
     --accent-hover: #FFC2D1;
-    
     --scroll-track: #fff5f7;
     --scroll-thumb: #FF9EB5;
+
+    /* VARIÁVEIS DE FONTE KAWAII */
+    --font-heading: 'Mochiy Pop One', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-code: 'Space Mono', monospace;
   }
 
-  /* 3. Aplicando os fundos no corpo do site */
+  /* 3. Aplicando estilos no corpo do site */
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body); /* Usando a variável */
     overflow-x: hidden;
-    /* Garante que o fundo cubra tudo e não se repita */
     background-repeat: no-repeat;
     background-attachment: fixed; 
     min-height: 100vh;
     
-    /* --- FUNDO GOTH: Textura de Ruído --- */
+    /* FUNDO GOTH: Textura de Ruído */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
     background-blend-mode: overlay;
 
     transition: background-color 0.5s ease, color 0.5s ease, background-image 0.5s ease;
   }
 
-  /* --- FUNDO KAWAII: Vibe Dreamy/Bokeh --- */
+  /* FUNDO KAWAII: Vibe Dreamy/Bokeh */
   body.kawaii {
-    /* AQUI ESTÁ A MÁGICA!
-       Estamos empilhando 3 gradientes:
-       1. Uma luz rosa suave no canto superior esquerdo.
-       2. Uma luz pêssego/amarela suave no canto inferior direito.
-       3. Um gradiente linear base de rosa para creme.
-    */
     background-image: 
       radial-gradient(at 20% 30%, rgba(255, 200, 220, 0.5) 0px, transparent 50%),
       radial-gradient(at 80% 70%, rgba(255, 240, 200, 0.5) 0px, transparent 50%),
       linear-gradient(to bottom right, #fff5f7, #fff0e0);
-    
-    /* Remove o blend-mode de textura do modo goth */
     background-blend-mode: normal;
   }
 
-  /* Versão sem imagens (Nativa do Navegador) */
+  /* Cursors */
+  body:not(.kawaii) { cursor: crosshair; }
+  body.kawaii { cursor: default; }
 
-/* Goth: Mira de precisão (Vibe FPS/Tech) */
-body:not(.kawaii) {
-  cursor: crosshair; 
-}
-
-/* Kawaii: Mãozinha ou Padrão */
-body.kawaii {
-  cursor: default; /* Ou 'cell' ou 'help' se quiser algo diferente */
-}
+  /* UTILITIES DE FONTE: Para usar no seu HTML/JSX */
+  .font-heading { font-family: var(--font-heading); }
+  .font-mono { font-family: var(--font-code); }
 }
 
 /* 4. Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--scroll-track); 
-}
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--scroll-track); }
+::-webkit-scrollbar-thumb { 
   background: var(--scroll-thumb); 
-  border-radius: 4px;
+  border-radius: 4px; 
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-hover);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--accent-hover); }
 
 /* 5. REGRAS DE TROCA DE FOTO */
 .foto-light { display: none; }
 .foto-dark { display: block; }
-
 body.kawaii .foto-light { display: block; }
 body.kawaii .foto-dark { display: none; }
 
+/* 6. EFEITO ADESIVO (STICKER) */
 body.kawaii .sticker-effect {
-    filter: 
-        /* Várias sombras sólidas para criar a borda branca grossa */
-        drop-shadow(4px 0 0 white) 
-        drop-shadow(-4px 0 0 white) 
-        drop-shadow(0 4px 0 white) 
-        drop-shadow(0 -4px 0 white) 
-        drop-shadow(3px 3px 0 white) 
-        drop-shadow(-3px -3px 0 white) 
-        drop-shadow(3px -3px 0 white) 
-        drop-shadow(-3px 3px 0 white)
-        /* Sombra final para descolar do fundo */
-        drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+  filter: 
+    drop-shadow(4px 0 0 white) 
+    drop-shadow(-4px 0 0 white) 
+    drop-shadow(0 4px 0 white) 
+    drop-shadow(0 -4px 0 white) 
+    drop-shadow(0 5px 15px rgba(0,0,0,0.1));
 }

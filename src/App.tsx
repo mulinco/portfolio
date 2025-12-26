@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Projects } from './components/Projects';
+import { Header } from './components/layout/Header';
+import { Hero } from './components/hero/Hero';
+import { About } from './components/about/About';
+import { Projects } from './components/projects/Projects';
+import { PetSlider } from './components/pets/PetSlider';
 
 function App() {
   // 1. Criamos o estado que controla se o modo Kawaii está ativo
@@ -29,6 +30,7 @@ function App() {
       <Hero />
       <About />
       <Projects />
+      <PetSlider isKawaii={isKawaii} />
     </main>
   );
 }
