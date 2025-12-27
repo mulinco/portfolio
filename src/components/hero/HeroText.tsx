@@ -26,7 +26,7 @@ export const HeroText = ({ typedText }: HeroTextProps) => {
 
       {/* Description */}
       <div className="border-l-4 border-accent/70 pl-6 py-2 text-text-muted text-base md:text-lg font-code transition-colors duration-500 italic relative">
-        <p>Transformando Coca-Cola e caos em arquitetura de dados elegante.</p>
+        <p>Troquei o microscópio pelo VS Code, mas continuo caçando bugs. 🐛💻</p>
       </div>
 
       {/* Buttons Area */}

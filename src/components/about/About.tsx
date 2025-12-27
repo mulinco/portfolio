@@ -109,17 +109,15 @@ export const About = () => {
                 <div className="font-code text-text-secondary text-lg leading-relaxed space-y-4 transition-colors duration-500">
                   <p>
                     <span className="text-accent font-bold">Maria Rodrigues.</span> {myAge} anos. 
-                    Apaixonada pela intersecção entre lógica complexa e design visual impactante.
+                    Troquei o jaleco pelo teclado, mas a mentalidade analítica continua a mesma.
                   </p>
                   <p>
-                    Enquanto tomo minha Coca-Cola (sagrada), construo aplicações que não apenas funcionam, 
-                    mas que têm alma. Minha especialidade é pegar problemas caóticos e transformar em 
-                    arquitetura de dados organizada e interfaces intuitivas.
+                    Quem estuda sistemas biológicos entende de complexidade e caos. Minha missão é organizar essa bagunça em arquiteturas limpas e interfaces intuitivas. A vantagem da programação? Aqui, pelo menos, o Ctrl+Z funciona.
                   </p>
                 </div>
 
                 <div className="pt-4 border-l-4 border-accent pl-4 italic text-text-muted font-metal kawaii:font-cute text-xl transition-colors duration-500">
-                  "Code like a goth, design like a kawaii princess."
+                  "Dark Mode por padrão. Kawaii por escolha."
                 </div>
             </div>
 
