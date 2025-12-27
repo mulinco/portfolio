@@ -5,6 +5,7 @@ import { About } from './components/about/About';
 import { Projects } from './components/projects/Projects';
 import { PetSlider } from './components/pets/PetSlider';
 import { Footer } from './components/Footer';
+import { ScrollProgress } from './components/ui/ScrollProgress';
 
 function App() {
   const [isKawaii, setIsKawaii] = useState(false);
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <main className="bg-goth-bg min-h-screen text-goth-text font-sans selection:bg-goth-pink selection:text-black transition-colors duration-500 kawaii:bg-pink-50">
-      
+      <ScrollProgress />
       <Header isKawaii={isKawaii} toggleTheme={toggleTheme} />
       
       {/* O Hero geralmente fica no topo, então o link do Logo (href="#") já cuida dele */}

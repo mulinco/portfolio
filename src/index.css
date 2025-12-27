@@ -29,10 +29,10 @@
     /* Fundo: Pale Pink (Nude Rosado) */
     --bg-primary: #F1DFDD;
     
-    /* Cards: Branco para manter a limpeza visual */
+    /* Cards */
     --bg-secondary: #ffffff;
     
-    /* Texto Principal: Brown Coffee (Café escuro) - Super chique */
+    /* Texto Principal: Brown Coffee  */
     --text-primary: #4A202A; 
     
     /* Texto Secundário: Claret (Vinho) */
@@ -119,7 +119,7 @@ body.kawaii .sticker-effect {
     drop-shadow(0 5px 15px rgba(216, 100, 135, 0.3)); 
 }
 
-/* 7. EFEITO ADESIVO HERO (Específico para a foto principal) */
+/* 7. EFEITO ADESIVO HERO  */
 body.kawaii .sticker-effect-hero {
   filter: 
     /* Camada 1: Grossura da borda branca */

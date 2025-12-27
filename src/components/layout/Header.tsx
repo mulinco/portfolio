@@ -14,26 +14,23 @@ export const Header = ({ isKawaii, toggleTheme }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // SEUS LINKS CONFIGURADOS AQUI:
   const links = [
-    { name: 'PROJETOS', href: '#projetos' }, // Aponta para a seção de projetos
-    { name: 'SKILLS', href: '#skills' },       // Aponta para a seção About (sobre mim)
-    { name: 'CONTATO', href: '#contato' },    // Sugestão: Leva ao rodapé/footer
+    { name: 'PROJETOS', href: '#projetos' }, 
+    { name: 'SKILLS', href: '#skills' },       
+    { name: 'CONTATO', href: '#contato' },    
   ];
 
   return (
     <header className="fixed w-full top-0 z-50 bg-goth-bg/90 backdrop-blur-md border-b border-goth-purple/20 kawaii:bg-pink-100/90 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         
-        {/* Logo reseta para o topo */}
+        {/* Logo */}
         <a href="#" className="hover:opacity-80 transition-opacity">
           <Logo />
         </a>
         
         <div className="flex items-center gap-6">
-          {/* Menu Desktop */}
           <div className="hidden md:block">
-            {/* Passamos a array 'links' para o Navigation */}
             <Navigation links={links} />
           </div>
 
@@ -41,11 +38,11 @@ export const Header = ({ isKawaii, toggleTheme }: HeaderProps) => {
             <SocialLinks />
           </div>
 
+          
           <ThemeToggle isKawaii={isKawaii} onToggle={toggleTheme} />
           
-          {/* Botão Mobile */}
           <button 
-            className="md:hidden text-2xl text-goth-pink kawaii:text-pink-500 transition-colors" 
+            className="md:hidden text-2xl text-goth-pink kawaii:text-pink-500 transition-colors z-50 relative" 
             onClick={toggleMenu}
             aria-label="Abrir menu"
           >
@@ -54,9 +51,26 @@ export const Header = ({ isKawaii, toggleTheme }: HeaderProps) => {
         </div>
       </div>
 
-      {/* DICA: Se você tiver um menu mobile (aquele que abre ao clicar no hambúrguer),
-         lembre-se de passar os 'links' para ele também aqui embaixo!
-      */}
+      {/* Menu Mobile */}
+      <div className={`
+        fixed inset-0 z-40 bg-goth-bg kawaii:bg-pink-50 flex flex-col items-center justify-center gap-8
+        transition-transform duration-300 md:hidden
+        ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+      `}>
+        {links.map((link) => (
+          <a 
+            key={link.name}
+            href={link.href}
+            onClick={() => setIsOpen(false)}
+            className="text-2xl font-bold font-heading text-goth-text kawaii:text-pink-600 hover:text-goth-pink kawaii:hover:text-pink-400 transition-colors"
+          >
+            {link.name}
+          </a>
+        ))}
+        <div className="mt-4 scale-125">
+          <SocialLinks />
+        </div>
+      </div>
     </header>
   );
 };

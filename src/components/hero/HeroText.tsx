@@ -52,7 +52,7 @@ export const HeroText = ({ typedText }: HeroTextProps) => {
             <Github size={28} />
           </a>
           <a 
-            href="https://www.linkedin.com/in/mariaclara-rodrigues/" 
+            href="https://www.linkedin.com/in/mariaclararodrigues3113/" 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="LinkedIn"

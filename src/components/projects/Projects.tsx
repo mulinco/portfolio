@@ -6,23 +6,22 @@ interface Project {
   shortDescription: string;
   longDescription: string;
   techs: string[];
-  image: string; // Caminho da imagem ou URL
+  image: string;
   github: string;
-  demo?: string; // Opcional, caso não tenha deploy
+  demo?: string;
   type: 'Frontend' | 'Backend' | 'Data Science' | 'Full Stack';
 }
 
 export const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-const projects: Project[] = [
+  const projects: Project[] = [
     {
       title: "Netflix Genre Analysis",
       type: "Data Science",
       shortDescription: "Análise exploratória de dados sobre tendências de gêneros.",
       longDescription: "Um estudo profundo utilizando Pandas e Matplotlib para entender a evolução dos gêneros de filmes e séries na plataforma Netflix ao longo das décadas. Inclui visualização de dados e insights estatísticos.",
       techs: ["Python", "Pandas", "Matplotlib", "Jupyter Notebook", "Data Viz"],
-      // Imagem: Cinema/Pipoca com vibe escura
       image: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=800&auto=format&fit=crop", 
       github: "https://github.com/mulinco/analysis-genre-netflix"
     },
@@ -32,7 +31,6 @@ const projects: Project[] = [
       shortDescription: "API e modelagem de dados para plataforma educacional.",
       longDescription: "O coração do sistema EduTech. Focado na arquitetura de banco de dados robusta, normalização e endpoints seguros. Simula o gerenciamento de alunos, cursos e matrículas.",
       techs: ["Python", "SQL", "PostgreSQL", "API Rest", "Database Modeling"],
-      // Imagem: Código/Servidor abstrato
       image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop", 
       github: "https://github.com/mulinco/edutech"
     },
@@ -42,7 +40,6 @@ const projects: Project[] = [
       shortDescription: "Ferramenta de automação para extração de dados de PDFs.",
       longDescription: "Uma aplicação prática construída com Streamlit que automatiza a leitura de arquivos PDF, extrai informações específicas e permite exportação estruturada. Solução real para problemas administrativos.",
       techs: ["Python", "Streamlit", "PyPDF2", "Automation", "Regex"],
-      // Imagem: Documentos organizados/Clean
       image: "https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=800&auto=format&fit=crop", 
       github: "https://github.com/mulinco/extrator-pdf-streamlit"
     },
@@ -52,7 +49,6 @@ const projects: Project[] = [
       shortDescription: "Interface moderna para ONG de impacto social e tecnológico.",
       longDescription: "Desenvolvimento do frontend para plataforma de estudo EAD do Instituto Consuelo. Foco em acessibilidade, responsividade e uma UI acolhedora para conectar doadores e beneficiários.",
       techs: ["React", "TypeScript", "Tailwind CSS", "UX/UI", "Responsividade"],
-      // Imagem: Mãos/Comunidade/Afeto
       image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop", 
       github: "https://github.com/Edutech-Instituto-Consuelo/frontend"
     },
@@ -62,14 +58,13 @@ const projects: Project[] = [
       shortDescription: "Este site! Um showcase interativo com temas dinâmicos.",
       longDescription: "Uma aplicação React completa demonstrando gerenciamento de estado complexo (temas Goth/Kawaii), animações CSS puras e arquitetura de componentes reutilizáveis.",
       techs: ["React", "Vite", "Tailwind", "Lucide React", "CSS Variables"],
-      // Imagem: Setup tech com estética neon/dark
       image: "https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=800&auto=format&fit=crop", 
       github: "https://github.com/mulinco/portfolio"
     }
   ];
 
   return (
-    <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto relative z-10">
+    <section id="projetos" className="py-20 px-4 md:px-8 max-w-7xl mx-auto relative z-10">
       
       {/* Cabeçalho da Seção */}
       <div className="text-center mb-16 space-y-4">
@@ -88,7 +83,19 @@ const projects: Project[] = [
           <div 
             key={index}
             onClick={() => setSelectedProject(project)}
-            className="group relative bg-bg-secondary border border-accent/20 rounded-xl kawaii:rounded-3xl p-6 hover:border-accent transition-all duration-300 hover:-translate-y-2 cursor-pointer shadow-lg hover:shadow-accent/10"
+            className="
+              group relative cursor-pointer 
+              bg-bg-secondary border border-accent/20 
+              
+              /* PADRONIZAÇÃO DE CARD */
+              rounded-xl kawaii:rounded-[2rem]
+              p-6 
+              
+              /* SOMBRAS E INTERAÇÃO PADRONIZADAS */
+              hover:border-accent hover:-translate-y-2 transition-all duration-300
+              shadow-lg hover:shadow-[0_0_20px_rgba(210,4,45,0.2)] 
+              kawaii:hover:shadow-md
+            "
           >
             {/* Ícone de Pasta/Tipo no Topo */}
             <div className="flex justify-between items-start mb-6">
@@ -98,13 +105,12 @@ const projects: Project[] = [
                  <Folder size={24} />}
               </div>
               <div className="flex gap-2">
-                 {/* Links rápidos no card (sem abrir modal) */}
                  <a 
                    href={project.github} 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   onClick={(e) => e.stopPropagation()} // Para não abrir o modal se clicar só no ícone
-                   className="text-text-secondary hover:text-accent transition-colors"
+                   onClick={(e) => e.stopPropagation()} 
+                   className="text-text-secondary hover:text-accent transition-colors hover:scale-110"
                  >
                    <Github size={20} />
                  </a>
@@ -122,7 +128,7 @@ const projects: Project[] = [
             {/* Tags (Preview) */}
             <div className="flex flex-wrap gap-2 mt-auto">
               {project.techs.slice(0, 3).map((tech, i) => (
-                <span key={i} className="text-xs font-code text-accent/80 bg-accent/5 px-2 py-1 rounded">
+                <span key={i} className="text-xs font-code text-accent/80 bg-accent/5 px-2 py-1 rounded border border-transparent group-hover:border-accent/20">
                   {tech}
                 </span>
               ))}
@@ -134,25 +140,34 @@ const projects: Project[] = [
         ))}
       </div>
 
-      {/* --- MODAL DE DETALHES DO PROJETO --- */}
+      {/* --- MODAL DE DETALHES --- */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setSelectedProject(null)} // Fecha ao clicar fora
+        >
           <div 
-            className="relative bg-bg-secondary w-full max-w-2xl rounded-xl kawaii:rounded-3xl border border-accent shadow-2xl animate-in zoom-in-95 duration-200 overflow-hidden flex flex-col max-h-[90vh]"
+            className="
+              relative bg-bg-secondary w-full max-w-2xl 
+              border border-accent shadow-2xl overflow-hidden flex flex-col max-h-[90vh]
+              animate-in zoom-in-95 duration-200
+              
+              /* PADRONIZAÇÃO DO MODAL */
+              rounded-xl kawaii:rounded-[2.5rem]
+            "
             onClick={(e) => e.stopPropagation()}
           >
             
             {/* Botão Fechar */}
             <button 
               onClick={() => setSelectedProject(null)}
-              className="absolute top-4 right-4 z-10 p-2 bg-bg-primary/50 rounded-full text-text-primary hover:text-accent hover:bg-bg-primary transition-all"
+              className="absolute top-4 right-4 z-10 p-2 bg-bg-primary/50 rounded-full text-text-primary hover:text-accent hover:bg-bg-primary transition-all backdrop-blur-sm"
             >
               <X size={24} />
             </button>
 
-            {/* Imagem do Projeto (Topo do Modal) */}
+            {/* Imagem do Projeto */}
             <div className="h-48 md:h-64 w-full bg-bg-primary relative overflow-hidden group">
-               {/* Se não tiver imagem real, mostra um placeholder elegante */}
                <div className="absolute inset-0 flex items-center justify-center text-accent/20 font-heading text-6xl select-none">
                  {selectedProject.type}
                </div>
@@ -160,10 +175,7 @@ const projects: Project[] = [
                  src={selectedProject.image} 
                  alt={selectedProject.title}
                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 hover:opacity-100"
-                 // Fallback para caso a imagem não exista
-                 onError={(e) => {
-                   (e.target as HTMLImageElement).style.display = 'none';
-                 }}
+                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                />
                <div className="absolute inset-0 bg-gradient-to-t from-bg-secondary to-transparent opacity-90"></div>
             </div>
@@ -181,14 +193,14 @@ const projects: Project[] = [
               </h3>
 
               <div className="prose prose-invert max-w-none mb-8">
-                <p className="text-text-secondary leading-relaxed text-lg">
+                <p className="text-text-secondary leading-relaxed text-lg font-sans">
                   {selectedProject.longDescription}
                 </p>
               </div>
 
-              {/* Lista Completa de Tecnologias */}
+              {/* Stack Tecnológico */}
               <div className="mb-8">
-                <h4 className="text-sm font-bold text-text-primary uppercase mb-3 flex items-center gap-2">
+                <h4 className="text-sm font-bold text-text-primary uppercase mb-3 flex items-center gap-2 font-code">
                   <Terminal size={16} className="text-accent"/> Stack Tecnológico
                 </h4>
                 <div className="flex flex-wrap gap-2">
@@ -203,13 +215,22 @@ const projects: Project[] = [
                 </div>
               </div>
 
-              {/* Botões de Ação */}
+              {/* BOTÕES DE AÇÃO PADRONIZADOS */}
               <div className="flex gap-4 pt-4 border-t border-accent/10">
                 <a 
                   href={selectedProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 bg-bg-primary border border-accent text-text-primary py-3 rounded-lg hover:bg-accent hover:text-white transition-all font-bold"
+                  className="
+                    flex-1 flex items-center justify-center gap-2 py-3 rounded-sm font-bold tracking-wide uppercase transition-all
+                    
+                    /* Estilo Secundário (Outline) */
+                    bg-bg-primary border border-accent text-text-primary 
+                    hover:bg-accent hover:text-white
+                    
+                    /* Padronização Kawaii */
+                    kawaii:rounded-full
+                  "
                 >
                   <Github size={20} />
                   Ver Código
@@ -220,7 +241,16 @@ const projects: Project[] = [
                     href={selectedProject.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 bg-accent text-white py-3 rounded-lg hover:bg-accent-hover transition-all font-bold shadow-lg shadow-accent/20"
+                    className="
+                      flex-1 flex items-center justify-center gap-2 py-3 rounded-sm font-bold tracking-wide uppercase transition-all
+                      
+                      /* Estilo Primário (Solid) */
+                      bg-accent text-white shadow-lg shadow-accent/20
+                      hover:bg-accent-hover hover:shadow-accent/40
+                      
+                      /* Padronização Kawaii */
+                      kawaii:rounded-full kawaii:hover:scale-105
+                    "
                   >
                     <ExternalLink size={20} />
                     Live Demo
@@ -228,7 +258,6 @@ const projects: Project[] = [
                 )}
               </div>
             </div>
-
           </div>
         </div>
       )}
