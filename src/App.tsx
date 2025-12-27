@@ -4,7 +4,7 @@ import { Hero } from './components/hero/Hero';
 import { About } from './components/about/About';
 import { Projects } from './components/projects/Projects';
 import { PetSlider } from './components/pets/PetSlider';
-import { Footer } from './components/Footer';
+import { Footer } from './components/layout/Footer';
 import { ScrollProgress } from './components/ui/ScrollProgress';
 
 function App() {
