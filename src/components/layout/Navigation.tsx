@@ -4,24 +4,26 @@ const links = [
   { name: 'Contato', href: '#contato' },
 ];
 
-export const Navigation = ({ mobile, onClick }: { mobile?: boolean; onClick?: () => void }) => {
+interface LinkItem {
+  name: string;
+  href: string;
+}
+
+interface NavigationProps {
+  links: LinkItem[]; // Recebe a lista do Header
+}
+
+export const Navigation = ({ links }: NavigationProps) => {
   return (
-    <nav className={`${mobile ? 'flex flex-col gap-6 items-center' : 'hidden md:flex gap-8'}`}>
+    <nav className="flex items-center gap-6">
       {links.map((link) => (
-        <a 
-          key={link.name} 
+        <a
+          key={link.name}
           href={link.href}
-          onClick={onClick}
-          className={`
-            uppercase tracking-widest font-code text-sm relative group transition-colors
-            ${mobile ? 'text-xl' : 'text-xs'}
-            text-goth-text hover:text-goth-mint kawaii:text-pink-700 kawaii:hover:text-pink-400
-          `}
+          className="text-goth-text font-medium hover:text-goth-pink transition-colors 
+                     kawaii:text-gray-700 hover:kawaii:text-pink-500 hover:kawaii:underline hover:kawaii:decoration-wavy"
         >
           {link.name}
-          {!mobile && (
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-goth-mint transition-all duration-300 group-hover:w-full kawaii:bg-pink-400"></span>
-          )}
         </a>
       ))}
     </nav>

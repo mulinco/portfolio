@@ -12,7 +12,7 @@ export const SocialLinks = () => {
         <FaGithub />
       </a>
       <a 
-        href="SEU_LINKEDIN" 
+        href="https://www.linkedin.com/in/mariaclararodrigues3113/" 
         target="_blank" 
         rel="noopener noreferrer"
         className="text-xl hover:text-goth-blue transition-colors kawaii:text-pink-500 kawaii:hover:scale-125"

@@ -31,10 +31,25 @@ export const HeroText = ({ typedText }: HeroTextProps) => {
 
       {/* Buttons */}
       <div className="flex items-center gap-8 pt-6 font-code">
-        <button className="relative group bg-accent text-bg-primary px-8 py-4 font-bold overflow-hidden transition-all duration-300 kawaii:rounded-full kawaii:shadow-[0_4px_14px_0_rgba(255,105,180,0.39)] hover:kawaii:shadow-[0_6px_20px_rgba(255,105,180,0.23)]">
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-6 kawaii:hidden"></div>
-            <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent hidden kawaii:block z-20"></div>
-          <span className="relative z-10 tracking-wider">VER PROJETOS</span>
+        <button className="
+        relative group bg-accent text-bg-primary px-8 py-4 font-bold overflow-hidden 
+        transition-all duration-100 ease-in-out
+        /* Estilos Kawaii Base 3D */
+        kawaii:rounded-2xl 
+        kawaii:border-2 kawaii:border-bg-primary/10
+        kawaii:shadow-[0_6px_0_rgba(219,39,119,1)] /* Sombra Sólida Rosa Escuro */
+        kawaii:translate-y-0
+        /* Interação Kawaii */
+        hover:kawaii:-translate-y-1 hover:kawaii:shadow-[0_8px_0_rgba(219,39,119,1)]
+        active:kawaii:translate-y-2 active:kawaii:shadow-none
+        ">
+        {/* Efeito Padrão (Invisível no Kawaii) */}
+        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-6 kawaii:hidden"></div>
+  
+        {/* No 3D, removemos o shimmer para focar no movimento físico, ou deixamos bem sutil */}
+        <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity hidden kawaii:block z-20"></div>
+  
+        <span className="relative z-10 tracking-wider">VER PROJETOS</span>
         </button>
         <div className="flex gap-6 text-text-primary items-center">
           <a href="#" className="hover:text-accent transition-all hover:scale-110 hover:-rotate-6"><Github size={28} /></a>

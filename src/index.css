@@ -7,7 +7,7 @@
 
 @layer base {
   
-  /* --- MODO GOTH (Padrão) --- */
+  /* --- MODO GOTH (Padrão - Intocado) --- */
   :root {
     --bg-primary: #0f0505;
     --bg-secondary: #1a0b0b;
@@ -24,16 +24,28 @@
     --font-code: 'Fira Code', monospace;
   }
 
-  /* --- MODO KAWAII --- */
+  /* --- MODO KAWAII (PALETA MAKEUP / ROSE GOLD) --- */
   .kawaii {
-    --bg-primary: #fff5f7;      
-    --bg-secondary: rgba(255, 255, 255, 0.8);    
-    --text-primary: #5c4b51; 
-    --text-secondary: #988288;
-    --accent: #FF9EB5;          
-    --accent-hover: #FFC2D1;
-    --scroll-track: #fff5f7;
-    --scroll-thumb: #FF9EB5;
+    /* Fundo: Pale Pink (Nude Rosado) */
+    --bg-primary: #F1DFDD;
+    
+    /* Cards: Branco para manter a limpeza visual */
+    --bg-secondary: #ffffff;
+    
+    /* Texto Principal: Brown Coffee (Café escuro) - Super chique */
+    --text-primary: #4A202A; 
+    
+    /* Texto Secundário: Claret (Vinho) */
+    --text-secondary: #76172C;
+    
+    /* Destaque: Blush (Rosa Queimado) */
+    --accent: #D86487;
+    
+    /* Hover: Claret (Vinho intenso) */
+    --accent-hover: #76172C;
+    
+    --scroll-track: #F1DFDD;
+    --scroll-thumb: #EEAAC3; /* Metallic Pink */
 
     /* VARIÁVEIS DE FONTE KAWAII */
     --font-heading: 'Mochiy Pop One', sans-serif;
@@ -45,7 +57,7 @@
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: var(--font-body); /* Usando a variável */
+    font-family: var(--font-body); 
     overflow-x: hidden;
     background-repeat: no-repeat;
     background-attachment: fixed; 
@@ -58,12 +70,17 @@
     transition: background-color 0.5s ease, color 0.5s ease, background-image 0.5s ease;
   }
 
-  /* FUNDO KAWAII: Vibe Dreamy/Bokeh */
+  /* FUNDO KAWAII: Vibe Soft Glam */
   body.kawaii {
     background-image: 
-      radial-gradient(at 20% 30%, rgba(255, 200, 220, 0.5) 0px, transparent 50%),
-      radial-gradient(at 80% 70%, rgba(255, 240, 200, 0.5) 0px, transparent 50%),
-      linear-gradient(to bottom right, #fff5f7, #fff0e0);
+      /* Brilho Metallic Pink no topo */
+      radial-gradient(at 30% 20%, rgba(238, 170, 195, 0.5) 0px, transparent 60%),
+      
+      /* Brilho Blush suave embaixo */
+      radial-gradient(at 80% 80%, rgba(216, 100, 135, 0.3) 0px, transparent 60%),
+      
+      /* Base Pale Pink */
+      linear-gradient(to bottom, #F1DFDD, #fff0f5);
     background-blend-mode: normal;
   }
 
@@ -71,7 +88,7 @@
   body:not(.kawaii) { cursor: crosshair; }
   body.kawaii { cursor: default; }
 
-  /* UTILITIES DE FONTE: Para usar no seu HTML/JSX */
+  /* UTILITIES DE FONTE */
   .font-heading { font-family: var(--font-heading); }
   .font-mono { font-family: var(--font-code); }
 }
@@ -91,12 +108,57 @@
 body.kawaii .foto-light { display: block; }
 body.kawaii .foto-dark { display: none; }
 
-/* 6. EFEITO ADESIVO (STICKER) */
+/* 6. EFEITO ADESIVO (STICKER - Padrão para os pets) */
 body.kawaii .sticker-effect {
   filter: 
     drop-shadow(4px 0 0 white) 
     drop-shadow(-4px 0 0 white) 
     drop-shadow(0 4px 0 white) 
     drop-shadow(0 -4px 0 white) 
-    drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+    /* Sombra Blush suave (#D86487) */
+    drop-shadow(0 5px 15px rgba(216, 100, 135, 0.3)); 
+}
+
+/* 7. EFEITO ADESIVO HERO (Específico para a foto principal) */
+body.kawaii .sticker-effect-hero {
+  filter: 
+    /* Camada 1: Grossura da borda branca */
+    drop-shadow(6px 0 0 white) 
+    drop-shadow(-6px 0 0 white) 
+    drop-shadow(0 6px 0 white) 
+    drop-shadow(0 -6px 0 white)
+    /* Camada 2: Preenchimento */
+    drop-shadow(3px 3px 0 white)
+    drop-shadow(-3px -3px 0 white)
+    /* Camada 3: Brilho METALLIC PINK (#EEAAC3) para dar um glow chique */
+    drop-shadow(0 0 25px rgba(238, 170, 195, 0.9));
+}
+
+/* Defina a classe base */
+.btn-kawaii {
+  background-color: #ff9a9e; /* Rosa Suave */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px; /* Bem redondo */
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+  transition: transform 0.2s;
+  font-family: 'Comic Sans MS', 'Varela Round', sans-serif; /* Fonte arredondada */
+}
+
+/* Efeito Hover com animação */
+.btn-kawaii:hover {
+  animation: jelly 0.5s;
+  background-color: #ffc3a0; /* Gradiente ou cor mais clara */
+}
+
+/* A animação Gelatina */
+@keyframes jelly {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(0.9, 1.1); }
+  50% { transform: scale(1.1, 0.9); }
+  75% { transform: scale(0.95, 1.05); }
 }

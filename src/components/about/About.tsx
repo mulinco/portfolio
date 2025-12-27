@@ -15,7 +15,7 @@ export const About = () => {
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
 
   // --- CONFIGURAÇÃO DA SUA DATA DE NASCIMENTO ---
-  const MY_BIRTHDAY = "1998-05-20"; 
+  const MY_BIRTHDAY = "1998-06-13"; 
 
   const myAge = useMemo(() => {
     const birthDate = new Date(MY_BIRTHDAY);
