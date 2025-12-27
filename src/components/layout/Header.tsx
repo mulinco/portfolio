@@ -16,9 +16,9 @@ export const Header = ({ isKawaii, toggleTheme }: HeaderProps) => {
 
   // SEUS LINKS CONFIGURADOS AQUI:
   const links = [
-    { name: 'Projetos', href: '#projetos' }, // Aponta para a seção de projetos
-    { name: 'Skills', href: '#skills' },       // Aponta para a seção About (sobre mim)
-    { name: 'Contato', href: '#contato' },    // Sugestão: Leva ao rodapé/footer
+    { name: 'PROJETOS', href: '#projetos' }, // Aponta para a seção de projetos
+    { name: 'SKILLS', href: '#skills' },       // Aponta para a seção About (sobre mim)
+    { name: 'CONTATO', href: '#contato' },    // Sugestão: Leva ao rodapé/footer
   ];
 
   return (

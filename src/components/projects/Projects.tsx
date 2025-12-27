@@ -49,8 +49,8 @@ const projects: Project[] = [
     {
       title: "Instituto Consuelo",
       type: "Frontend",
-      shortDescription: "Interface moderna para ONG de impacto social.",
-      longDescription: "Desenvolvimento do frontend para o Instituto Consuelo. Foco em acessibilidade, responsividade e uma UI acolhedora para conectar doadores e beneficiários.",
+      shortDescription: "Interface moderna para ONG de impacto social e tecnológico.",
+      longDescription: "Desenvolvimento do frontend para plataforma de estudo EAD do Instituto Consuelo. Foco em acessibilidade, responsividade e uma UI acolhedora para conectar doadores e beneficiários.",
       techs: ["React", "TypeScript", "Tailwind CSS", "UX/UI", "Responsividade"],
       // Imagem: Mãos/Comunidade/Afeto
       image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop", 

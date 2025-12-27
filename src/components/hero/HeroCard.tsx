@@ -77,11 +77,7 @@ export const HeroCard = ({ fact, currentIcon, onTriggerSecret }: HeroCardProps) 
           </div>
         </div>
 
-        {/* === O BOTÃO (FORA DO CARD, DENTRO DO WRAPPER) ===
-           Agora ele fica posicionado relativo ao Wrapper, então:
-           1. Segue o card se a tela mudar de tamanho.
-           2. Fica POR CIMA da borda (z-50) sem ser cortado.
-        */}
+        {/* === O BOTÃO (FORA DO CARD, DENTRO DO WRAPPER) === */}
         <button 
           onClick={onTriggerSecret} 
           className={`

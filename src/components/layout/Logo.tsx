@@ -1,7 +1,17 @@
 export const Logo = () => {
   return (
-    <div className="text-2xl font-extrabold transition-all cursor-pointer hover:scale-110 hover:rotate-6 text-goth-purple kawaii:bg-gradient-to-r kawaii:from-pink-400 kawaii:to-purple-300 kawaii:bg-clip-text kawaii:text-transparent kawaii:drop-shadow-sm">
-      <p>mulinco.dev</p>
+    <div className="select-none transition-all duration-300">
+      <span className="
+        text-3xl 
+        /* Modo Goth (Padrão): Fonte Gótica Antiga */
+        font-['UnifrakturMaguntia'] tracking-wider text-goth-text
+        
+        /* Modo Kawaii: Fonte Mochiy (Bolha/Pop) */
+        kawaii:font-['Mochiy_Pop_One'] kawaii:text-2xl kawaii:tracking-normal kawaii:text-pink-500
+      ">
+        mulinco
+        <span className="text-goth-pink kawaii:text-yellow-400">.dev</span>
+      </span>
     </div>
   );
 };
