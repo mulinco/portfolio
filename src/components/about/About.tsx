@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
 import { Code, Database, Layout, Sparkles, X, Bot, GitBranch } from 'lucide-react';
 
-// 1. IMPORTANDO OS COMPONENTES NOVOS (Verifique se o caminho está certo)
 import { CVCard } from '../cv/CVCard';
 import { CVModal } from '../cv/CVModal';
+import InfiniteScroll from '../ui/InfiniteScroll'; 
 
 interface Skill {
   name: string;
@@ -16,8 +16,6 @@ interface Skill {
 
 export const About = () => {
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
-  
-  // 2. NOVO ESTADO PARA O MODAL DO CURRÍCULO
   const [isCVOpen, setIsCVOpen] = useState(false);
 
   const MY_BIRTHDAY = "1998-06-13"; 
@@ -84,6 +82,20 @@ export const About = () => {
     },
   ];
 
+  // 2. PREPARANDO OS ITENS PARA O SCROLL
+  // Transformamos a lista de skills em componentes visuais bonitos (chips)
+  const scrollItems = skills.map((skill, index) => (
+    <div 
+      key={index}
+      className="flex items-center gap-3 px-6 py-3 bg-bg-secondary/50 backdrop-blur-md border border-accent/20 rounded-xl kawaii:rounded-full shadow-sm hover:border-accent/50 transition-colors cursor-default"
+    >
+      <span className="text-accent">{skill.icon}</span>
+      <span className="font-code font-bold text-text-primary uppercase tracking-wider text-sm">
+        {skill.name}
+      </span>
+    </div>
+  ));
+
   return (
     <section className="relative py-20 overflow-hidden bg-bg-primary transition-colors duration-500 font-sans">
       
@@ -97,7 +109,6 @@ export const About = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start"> 
-          {/* Mudei items-center para items-start para alinhar melhor com o CV card embaixo */}
           
           {/* Lado Esquerdo: Texto + CV CARD */}
           <div className="space-y-8">
@@ -121,13 +132,12 @@ export const About = () => {
                 </div>
             </div>
 
-            {/* 3. INSERINDO O CARD DO CURRÍCULO AQUI */}
             <div className="pt-4">
                <CVCard onClick={() => setIsCVOpen(true)} />
             </div>
           </div>
 
-          {/* Lado Direito: Grid de Skills */}
+          {/* Lado Direito: Grid de Skills (INTERATIVO) */}
           <div className="grid grid-cols-2 gap-4">
             {skills.map((skill, index) => (
               <div 
@@ -153,6 +163,16 @@ export const About = () => {
           </div>
 
         </div>
+      </div>
+
+      {/* 3. AQUI ESTÁ O INFINITE SCROLL (RODAPÉ DA SEÇÃO) */}
+      <div className="mt-20 border-t border-accent/10 pt-8 relative z-10">
+        <InfiniteScroll 
+          items={scrollItems} 
+          speed="normal" 
+          direction="left"
+          className="opacity-80 hover:opacity-100 transition-opacity" 
+        />
       </div>
 
       {/* Modal de Skills */}
@@ -201,7 +221,7 @@ export const About = () => {
         </div>
       )}
 
-      {/* 4. INSERINDO O MODAL DO CURRÍCULO */}
+      {/* MODAL DO CURRÍCULO */}
       <CVModal 
         isOpen={isCVOpen} 
         onClose={() => setIsCVOpen(false)} 

@@ -1,4 +1,5 @@
 import { Github, Linkedin } from 'lucide-react';
+import DecryptedText from '../ui/DecryptedText';
 
 interface HeroTextProps {
   typedText: string;
@@ -16,19 +17,33 @@ export const HeroText = ({ typedText }: HeroTextProps) => {
       </div>
 
       {/* Main Title */}
-      <div>
-        <h1 className="text-7xl md:text-9xl kawaii:md:text-7xl leading-none transition-all duration-500 font-bold mb-4 kawaii:tracking-tighter"
-      style={{ fontFamily: 'var(--font-titulo-zao)' }} 
-      >
-          <span className="text-text-primary drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] kawaii:drop-shadow-sm kawaii:text-accent">
-            Maria <br /> Rodrigues
-          </span>
-        </h1>
-      </div>
+    <div className="relative z-10"> 
+    <h1 
+    className="
+      text-5xl sm:text-6xl md:text-7xl 
+      lg:text-8xl kawaii:lg:text-7xl  /* No laptop: Goth usa 8xl, Kawaii reduz para 7xl */
+      xl:text-9xl kawaii:xl:text-8xl  /* No monitorzão: Goth usa 9xl, Kawaii reduz para 8xl */
+      leading-[0.9] transition-all duration-500 font-bold mb-6 kawaii:tracking-tighter"
+    style={{ fontFamily: 'var(--font-titulo-zao)' }}
+    >
+    <span className="text-text-primary drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] kawaii:drop-shadow-sm kawaii:text-accent block">
+      Maria
+    </span>
+    <span className="text-text-primary drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] kawaii:drop-shadow-sm kawaii:text-accent block md:-mt-4">
+      Rodrigues
+    </span>
+    </h1>
+    </div>
 
       {/* Description */}
       <div className="border-l-4 border-accent/70 pl-6 py-2 text-text-secondary text-base md:text-lg font-code transition-colors duration-500 italic relative">
-        <p>Troquei o microscópio pelo VS Code, mas continuo caçando bugs.</p>
+      <p>
+      <DecryptedText 
+      text="Troquei o microscópio pelo VS Code, mas continuo caçando bugs."
+      speed={100}
+      className="inline-block" 
+      />
+      </p>
       </div>
 
       {/* Buttons Area */}

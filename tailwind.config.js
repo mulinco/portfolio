@@ -9,7 +9,30 @@ export default {
   darkMode: 'class', 
   theme: {
     extend: {
-      // ... suas animações e keyframes (mantive oculto para economizar espaço) ...
+      // ✅ 1. ADICIONE AS ANIMAÇÕES AQUI (Logo no começo do extend)
+      animation: {
+    // Agora definimos explicitamente o tempo aqui!
+    'scroll-left': 'scroll-left 40s linear infinite',
+    'scroll-left-fast': 'scroll-left 20s linear infinite',
+    'scroll-left-slow': 'scroll-left 60s linear infinite',
+    
+    'scroll-right': 'scroll-right 40s linear infinite',
+    'scroll-right-fast': 'scroll-right 20s linear infinite',
+    'scroll-right-slow': 'scroll-right 60s linear infinite',
+  },
+      // ✅ 2. ADICIONE OS KEYFRAMES (Os passos da dança)
+      keyframes: {
+        'scroll-left': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' }, // Move metade (pq o conteúdo é duplicado)
+        },
+        'scroll-right': {
+          from: { transform: 'translateX(-50%)' },
+          to: { transform: 'translateX(0)' },
+        },
+      },
+
+      // ... suas cores e o resto que já estava aí ...
       colors: {
         bg: {
           primary: 'var(--bg-primary)',
@@ -23,7 +46,6 @@ export default {
           DEFAULT: 'var(--accent)',
           hover: 'var(--accent-hover)',
         },
-        // Adicionei cores góticas específicas se precisar usar fora das variáveis
         goth: {
           text: '#E0E0E0',
           pink: '#D2042D',
@@ -32,20 +54,11 @@ export default {
         }
       },
       fontFamily: {
-        /* AQUI ESTÁ A CORREÇÃO DE UX */
-        /* 1. 'sans' é o padrão do Tailwind. Mapeamos para 'font-body' (Inter) */
         sans: ['var(--font-body)', 'sans-serif'], 
-        
-        /* 2. 'heading' será usada APENAS nos Títulos (Gótica/Kawaii) */
         heading: ['var(--font-heading)', 'serif'],
-        
-        /* 3. Mono para códigos */
         mono: ['var(--font-code)', 'monospace'],
-
         metal: ['var(--font-special)', 'cursive'],
-
         hero: ['var(--font-hero)', 'sans-serif'],
-
         display: ['var(--font-display)', 'sans-serif'],
       },
       backgroundImage: {
