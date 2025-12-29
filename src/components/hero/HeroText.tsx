@@ -41,7 +41,7 @@ export const HeroText = ({ typedText }: HeroTextProps) => {
       <p>
       <DecryptedText 
       text="Troquei o microscópio pelo VS Code, mas continuo caçando bugs."
-      speed={100}
+      speed={35}
       className="inline-block" 
       />
       </p>
