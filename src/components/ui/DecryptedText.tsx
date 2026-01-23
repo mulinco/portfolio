@@ -8,7 +8,7 @@ interface DecryptedTextProps {
 
 export default function DecryptedText({
   text,
-  speed = 90, 
+  speed = 100, 
   className = '',
 }: DecryptedTextProps) {
   const [displayText, setDisplayText] = useState('');

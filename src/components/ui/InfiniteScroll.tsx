@@ -15,7 +15,6 @@ export default function InfiniteScroll({
   className = '' 
 }: InfiniteScrollProps) {
   
-  // ✅ CORREÇÃO: Escrevemos as classes por extenso para o Tailwind ler
   const getAnimationClass = () => {
     // Mapeia todas as combinações possíveis
     const animationMap = {

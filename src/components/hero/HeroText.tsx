@@ -1,6 +1,7 @@
 import { Github, Linkedin } from 'lucide-react';
 import DecryptedText from '../ui/DecryptedText';
 import MagneticWrapper from '../ui/MagneticWrapper';
+import { motion } from "framer-motion";
 
 interface HeroTextProps {
   typedText: string;
@@ -8,6 +9,12 @@ interface HeroTextProps {
 
 export const HeroText = ({ typedText }: HeroTextProps) => {
   return (
+    <motion.div 
+      initial={{ opacity: 0, x: -30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="flex flex-col gap-4" // Mantenha suas classes originais aqui
+    >
     <div className="space-y-8 relative">
       {/* Typed Text Area */}
       <div className="h-32 flex items-center"> 
@@ -41,7 +48,7 @@ export const HeroText = ({ typedText }: HeroTextProps) => {
       <p>
       <DecryptedText 
       text="Troquei o microscópio pelo VS Code, mas continuo caçando bugs."
-      speed={35}
+      speed={20}
       className="inline-block" 
       />
       </p>
@@ -88,5 +95,6 @@ export const HeroText = ({ typedText }: HeroTextProps) => {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };

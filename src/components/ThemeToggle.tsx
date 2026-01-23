@@ -37,7 +37,6 @@ export const ThemeToggle = () => {
         relative overflow-hidden flex items-center gap-2 px-4 py-2 
         border-2 transition-all duration-500 ease-in-out group
         ${theme === 'goth' 
-          /* AQUI ESTA A CORREÇÃO: Usamos 'accent' em vez de #00ff41 */
           ? 'bg-transparent border-accent text-accent hover:bg-accent hover:text-bg-primary rounded-sm' 
           : 'bg-pink-100 border-pink-400 text-pink-500 hover:bg-pink-200 rounded-3xl shadow-[0_0_15px_rgba(255,105,180,0.5)]'
         }

@@ -1,161 +1,229 @@
-import { useState } from 'react';
-import { X } from 'lucide-react'; 
-import MagneticWrapper from '../ui/MagneticWrapper'; // ✅ Importado
+import { useState, useEffect } from 'react';
+import { X, PawPrint, Database, Heart, Shield, Sparkles } from 'lucide-react'; 
+import MagneticWrapper from '../ui/MagneticWrapper'; 
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
 interface Pet {
   name: string;
-  title: string;
+  gothTitle: string;
+  kawaiiTitle: string;
   image: string;
-  description: string;
+  gothDesc: string;
+  kawaiiDesc: string;
   birthDate: string;
   skills: string[];
 }
 
-export const PetSlider = () => {
+interface PetSliderProps {
+  isKawaii: boolean;
+  isStarted: boolean;
+}
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+  }
+};
+
+const petCardVariants: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.9 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { duration: 0.8, ease: "easeOut" } 
+  }
+};
+
+export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps) => {
   const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
+  
+  // 1. LÓGICA DE AUTO-DETECÇÃO (Igual à Timeline para não falhar)
+  const [currentIsKawaii, setCurrentIsKawaii] = useState(propIsKawaii);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const hasKawaiiClass = document.body.classList.contains('kawaii');
+      setCurrentIsKawaii(hasKawaiiClass);
+    };
+
+    const observer = new MutationObserver(() => checkTheme());
+    observer.observe(document.body, { attributes: true });
+    checkTheme();
+
+    return () => observer.disconnect();
+  }, []);
 
   const pets: Pet[] = [
     { 
       name: "Júpiter", 
-      title: "Guardião Caramelizado", 
+      gothTitle: "UNIT_JUPITER // DEFENSE_SYSTEM",
+      kawaiiTitle: "Príncipe Júpiter ✨",
       image: "jupi.jpg", 
       birthDate: "2025-05-03", 
-      description: "O estagiário da casa. Responsável pela segurança contra entregadores e pela mastigação não autorizada de chinelos.",
-      skills: ["Destruição de brinquedos", "Soneca pós-almoço", "Olhar de pidão", "Ama a Vênus"]
+      gothDesc: "Unidade de interceptação de alta energia. Especialista em neutralização de calçados e monitoramento de perímetro.",
+      kawaiiDesc: "Um gigante de caramelo que ama ganhar beijinhos e é o melhor amigo da Vênus!",
+      skills: ["Proteção", "Soneca Estratégica", "Olhar de Pidão", "Sir Ogro", "Ama a Vênus", "Amor Inigualável" ]
     },
     { 
       name: "Vênus", 
-      title: "Especialista em Afagos", 
+      gothTitle: "UNIT_VENUS // INTEL_OPERATIVE",
+      kawaiiTitle: "Estrela Vênus 🌸",
       image: "venuss.jpg",
       birthDate: "2020-01-13", 
-      description: "A gerente sênior. Supervisiona o caos e exige o pagamento de horas extras em forma de carinho na barriga.",
-      skills: ["Pastoreio de visitas", "Drama por petisco", "Auditoria de cozinha", "Odeia o Jupi"]
+      gothDesc: "Analista de comportamento. Exige tributos em afeto e realiza auditoria constante na zona de alimentação (cozinha).",
+      kawaiiDesc: "A rainha da casa! Adora fazer um drama por petisco e é a inteligência por trás do caos.",
+      skills: ["Auditoria", "Drama Nível 100", "Salto Ornamental", "Lady Delicadeza", "Odeia o Jupi", "Amor incondicional" ]
     }
   ];
 
   const calculateAge = (birthDateString: string) => {
     const birthDate = new Date(birthDateString);
     const today = new Date();
-    
     let years = today.getFullYear() - birthDate.getFullYear();
     let months = today.getMonth() - birthDate.getMonth();
-
     if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
       years--;
       months += 12;
     }
-
-    if (years === 0) return `${months} meses`;
-    if (years === 1) return "1 ano";
-    return `${years} anos`;
+    return years === 0 ? `${months} meses` : years === 1 ? "1 ano" : `${years} anos`;
   };
 
   return (
-    <section className="py-12 relative">
-      <h2 className="text-center font-display text-4xl mb-10 text-accent transition-all">
-        Meus Assistentes
-      </h2>
+    <section className={`py-24 relative overflow-hidden transition-colors duration-500 ${currentIsKawaii ? 'bg-pink-50/30' : 'bg-transparent'}`}>
+      
+      {/* CABEÇALHO PERSONALIZADO */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={isStarted ? { opacity: 1, y: 0 } : {}}
+        viewport={{ once: true }}
+        className="text-center mb-20 space-y-4"
+      >
+        <div className="flex justify-center mb-4">
+            {currentIsKawaii ? (
+                <Sparkles className="text-pink-400 animate-pulse" size={40} />
+            ) : (
+                <Shield className="text-accent animate-pulse" size={40} />
+            )}
+        </div>
+        
+        <h2 className={`text-4xl md:text-6xl font-display uppercase tracking-tight ${currentIsKawaii ? 'text-[#D86487] font-cute' : 'text-accent font-black'}`}>
+          {currentIsKawaii ? 'Meus Filhos' : 'BIO_DATA: CANINE_LOG'}
+        </h2>
+        
+        <p className={`font-code text-sm md:text-lg ${currentIsKawaii ? 'text-[#76172C] italic' : 'text-text-secondary uppercase tracking-[0.4em]'}`}>
+          {currentIsKawaii ? 'Conheça o Júpiter e a Vênus, os donos do meu coração! 🐾' : '> Acessando banco de dados biológicos... [OK]'}
+        </p>
+      </motion.div>
 
-      {/* Slider */}
-      <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-8 max-w-4xl mx-auto">
+      {/* GRID CENTRALIZADO */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView={isStarted ? "visible" : "hidden"}
+        viewport={{ once: true, amount: 0.3 }}
+        className="flex flex-wrap justify-center gap-12 px-6 max-w-7xl mx-auto"
+      >
         {pets.map((pet, index) => (
-          <div 
+          <motion.div 
             key={index}
-            className="min-w-[300px] md:min-w-[400px] snap-center flex-shrink-0 cursor-pointer"
+            variants={petCardVariants}
+            className="w-full max-w-[400px] cursor-pointer"
             onClick={() => setSelectedPet(pet)} 
           >
-            <div className="bg-bg-secondary border-2 border-accent/20 rounded-3xl p-6 transition-all hover:border-accent hover:scale-[1.02] group kawaii:bg-white kawaii:shadow-xl h-full flex flex-col items-center">
-              
-              {/* 1. EFEITO MAGNÉTICO NA FOTO DO SLIDER */}
-              {/* Isso faz a foto "seguir" o mouse levemente */}
-              <div className="mb-6">
-                <MagneticWrapper strength={0.3}>
-                    <div className="w-48 h-48 relative">
-                        <img 
-                        src={pet.image} 
-                        alt={pet.name}
-                        className="w-full h-full object-cover rounded-full border-4 border-accent/30 sticker-effect transition-transform group-hover:scale-105"
-                        />
-                    </div>
+            <div className={`
+              h-full group relative p-12 transition-all duration-500 border-2
+              ${currentIsKawaii 
+                ? 'bg-white border-[#EEAAC3] rounded-[4rem] shadow-[12px_12px_0px_#EEAAC3] hover:shadow-[18px_18px_0px_#D86487]' 
+                : 'bg-bg-secondary/40 backdrop-blur-md border-accent/20 rounded-[3rem] hover:border-accent hover:shadow-[0_0_40px_rgba(210,4,45,0.2)]'}
+            `}>
+              <div className="flex flex-col items-center">
+                <MagneticWrapper strength={0.15}>
+                  <div className="w-44 h-44 mb-8 relative">
+                    <img 
+                      src={pet.image} 
+                      alt={pet.name}
+                      className={`w-full h-full object-cover border-4 transition-transform duration-500 group-hover:scale-110 rounded-full ${currentIsKawaii ? 'border-[#EEAAC3]' : 'border-accent/40'}`}
+                    />
+                  </div>
                 </MagneticWrapper>
-              </div>
 
-              {/* Textos Resumidos */}
-              <div className="text-center">
-                <h3 className="font-bold text-2xl text-text-primary mb-1">
-                  {pet.name}
-                </h3>
-                <p className="font-body text-sm text-text-secondary uppercase tracking-widest">
-                  {pet.title}
-                </p>
-                <p className="mt-4 text-xs text-accent underline opacity-0 group-hover:opacity-100 transition-opacity">
-                  Ver ficha técnica
-                </p>
+                <div className="text-center">
+                  <h3 className={`text-3xl font-bold mb-2 ${currentIsKawaii ? 'text-[#4A202A] font-cute' : 'text-text-primary'}`}>
+                    {pet.name}
+                  </h3>
+                  <p className={`text-xs uppercase tracking-widest font-black ${currentIsKawaii ? 'text-[#D86487]' : 'text-accent opacity-80'}`}>
+                    {currentIsKawaii ? pet.kawaiiTitle : pet.gothTitle}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
           
-      {/* --- MODAL DE DETALHES --- */}
-      {selectedPet && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          
-          <div className="relative bg-bg-secondary w-full max-w-lg rounded-3xl border-2 border-accent p-6 md:p-8 shadow-2xl animate-in zoom-in-95 duration-200">
-            
-            {/* 2. EFEITO MAGNÉTICO NO BOTÃO FECHAR */}
-            {/* Apliquei as classes de posicionamento (absolute top-4...) no wrapper para ele ficar no lugar certo */}
-            <MagneticWrapper strength={0.5} className="absolute top-4 right-4 z-50">
-                <button 
-                onClick={() => setSelectedPet(null)}
-                className="p-2 bg-bg-primary/50 rounded-full text-text-secondary hover:text-accent hover:bg-bg-primary transition-all backdrop-blur-sm"
-                >
-                <X size={28} />
-                </button>
-            </MagneticWrapper>
+      {/* MODAL PERSONALIZADO */}
+      <AnimatePresence>
+        {selectedPet && (
+          <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className={`relative w-full max-w-lg p-10 shadow-2xl border-2 ${currentIsKawaii ? 'bg-white rounded-[3.5rem] border-[#EEAAC3]' : 'bg-bg-secondary rounded-[2.5rem] border-accent'}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button onClick={() => setSelectedPet(null)} className="absolute top-8 right-8 text-text-secondary hover:text-accent transition-colors">
+                <X size={36} />
+              </button>
 
-            <div className="flex flex-col items-center">
-              
-              {/* Também fica legal magnético na foto grande do modal */}
-              <MagneticWrapper strength={0.2}>
+              <div className="flex flex-col items-center">
+                <div className="w-36 h-36 mb-6">
                   <img 
                     src={selectedPet.image} 
                     alt={selectedPet.name}
-                    className="w-32 h-32 rounded-full border-4 border-accent object-cover mb-4 shadow-lg"
+                    className={`w-full h-full object-cover border-4 rounded-full ${currentIsKawaii ? 'border-[#EEAAC3]' : 'border-accent'}`}
                   />
-              </MagneticWrapper>
-              
-              <h3 className="font-heading text-3xl text-accent mb-1">{selectedPet.name}</h3>
-              <span className="text-sm text-text-secondary uppercase tracking-widest mb-6">{selectedPet.title}</span>
-              
-              <div className="text-left w-full space-y-4 bg-black/20 p-4 rounded-xl">
-                <div>
-                  <h4 className="font-bold text-accent text-sm uppercase mb-1">Idade</h4>
-                  <p className="text-text-primary">{calculateAge(selectedPet.birthDate)}</p>
                 </div>
                 
-                <div>
-                  <h4 className="font-bold text-accent text-sm uppercase mb-1">Função na Empresa</h4>
-                  <p className="text-text-primary text-sm leading-relaxed">
-                    {selectedPet.description}
-                  </p>
-                </div>
+                <h3 className={`text-4xl font-bold mb-1 ${currentIsKawaii ? 'text-[#4A202A] font-cute' : 'text-accent'}`}>{selectedPet.name}</h3>
+                <p className="text-sm uppercase tracking-widest text-text-secondary mb-8 font-code">{currentIsKawaii ? 'Membro da Família' : 'SUBJECT_CLASSIFICATION'}</p>
+                
+                <div className={`w-full p-8 space-y-6 ${currentIsKawaii ? 'bg-pink-50/50 rounded-[2.5rem]' : 'bg-black/40 rounded-[2rem]'}`}>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <h4 className={`text-xs font-bold uppercase mb-1 tracking-tighter ${currentIsKawaii ? 'text-[#D86487]' : 'text-accent'}`}>{currentIsKawaii ? 'Idade' : 'LIFE_SPAN'}</h4>
+                      <p className="text-text-primary font-medium">{calculateAge(selectedPet.birthDate)}</p>
+                    </div>
+                    <div>
+                      <h4 className={`text-xs font-bold uppercase mb-1 ${currentIsKawaii ? 'text-[#D86487]' : 'text-accent'}`}>{currentIsKawaii ? 'Peso' : 'BIO_MASS'}</h4>
+                      <p className="text-text-primary font-medium">Aprox. 20kg</p>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 className={`text-xs font-bold uppercase mb-1 ${currentIsKawaii ? 'text-[#D86487]' : 'text-accent'}`}>{currentIsKawaii ? 'Sobre' : 'OPERATIONAL_PROFILE'}</h4>
+                    <p className="text-sm text-text-secondary leading-relaxed font-sans">{currentIsKawaii ? selectedPet.kawaiiDesc : selectedPet.gothDesc}</p>
+                  </div>
 
-                <div>
-                  <h4 className="font-bold text-accent text-sm uppercase mb-2">Habilidades Especiais</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedPet.skills.map((skill, idx) => (
-                      <span key={idx} className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-bold border border-accent/20">
-                        {skill}
-                      </span>
-                    ))}
+                  <div>
+                    <h4 className={`text-xs font-bold uppercase mb-3 ${currentIsKawaii ? 'text-[#D86487]' : 'text-accent'}`}>{currentIsKawaii ? 'Poderes Mágicos' : 'SPECIAL_SKILLS'}</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedPet.skills.map((skill, idx) => (
+                        <span key={idx} className={`px-4 py-1.5 text-[10px] font-bold border ${currentIsKawaii ? 'bg-white border-[#EEAAC3] text-[#D86487] rounded-full' : 'bg-accent/5 border-accent/30 text-accent rounded-lg'}`}>
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </section>
   );
 };

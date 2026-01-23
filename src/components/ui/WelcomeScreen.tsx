@@ -1,81 +1,108 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Terminal, Sparkles } from 'lucide-react'; 
+import { motion } from 'framer-motion';
 
 interface WelcomeScreenProps {
   isKawaii: boolean;
+  onEnter: () => void;
 }
 
-export const WelcomeScreen = ({ isKawaii }: WelcomeScreenProps) => {
-  const [show, setShow] = useState(false);
-  const [isFadingOut, setIsFadingOut] = useState(false);
+export const WelcomeScreen = ({ isKawaii: propIsKawaii, onEnter }: WelcomeScreenProps) => {
+  const [currentIsKawaii, setCurrentIsKawaii] = useState(propIsKawaii);
 
   useEffect(() => {
-    // Verifica se o usuário já viu a intro nesta sessão
-    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
-    
-    if (!hasSeenIntro) {
-      setShow(true);
-      // Bloqueia o scroll enquanto a intro está ativa
-      document.body.style.overflow = 'hidden';
-    }
+    const checkTheme = () => {
+      const hasKawaiiClass = document.body.classList.contains('kawaii');
+      setCurrentIsKawaii(hasKawaiiClass);
+    };
+
+    const observer = new MutationObserver(() => checkTheme());
+    observer.observe(document.body, { attributes: true });
+    checkTheme();
+
+    return () => observer.disconnect();
   }, []);
 
-  const handleEnter = () => {
-    setIsFadingOut(true);
-    // Salva no navegador que o usuário já viu
-    sessionStorage.setItem('hasSeenIntro', 'true');
-    
-    // Devolve o scroll e remove o componente após a animação
-    setTimeout(() => {
-      setShow(false);
-      document.body.style.overflow = 'unset';
-    }, 500); // 500ms é o tempo da transição CSS
-  };
-
-  if (!show) return null;
-
   return (
-    <div 
+    <motion.div 
+      key="welcome-screen-wrapper"
+      exit={{ 
+        opacity: 0, 
+        scale: 1.1,
+        filter: "blur(20px)",
+        transition: { duration: 0.8, ease: "circIn" }
+      }}
       className={`
-        fixed inset-0 z-[100] flex flex-col items-center justify-center px-4
-        transition-opacity duration-500 ease-in-out
-        ${isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}
-        ${isKawaii ? 'bg-pink-100 text-gray-800' : 'bg-[#050505] text-gray-200'}
+        fixed inset-0 z-[999] flex flex-col items-center justify-center px-4 transition-colors duration-700
+        ${currentIsKawaii 
+          ? 'bg-[#FFE4E9] bg-[radial-gradient(circle_at_center,_#ffffff_0%,_#FFD1DC_100%)]' 
+          : 'bg-[#050505] bg-[radial-gradient(circle_at_center,_#1a0505_0%,_#050505_100%)]'}
       `}
     >
-      {/* Container da Mensagem */}
-      <div className={`
-        max-w-2xl text-center space-y-8 p-8 rounded-2xl
-        ${isKawaii ? 'border-4 border-white shadow-[0_0_0_4px_#fbcfe8]' : 'border border-white/10 bg-white/5 backdrop-blur-sm'}
-      `}>
-        
-        {/* Título ou Saudação */}
-        <h2 className={`text-3xl md:text-5xl font-bold mb-4 ${isKawaii ? 'font-heading text-pink-500' : 'font-mono'}`}>
-          {isKawaii ? 'Oie! Bem-vinde! ✨' : '> SYSTEM.INIT_'}
-        </h2>
-
-        {/* Mensagem do Anfitrião */}
-        <p className={`text-lg md:text-xl leading-relaxed ${isKawaii ? 'font-sans' : 'font-code'}`}>
-          "Bem-vindes ao meu portfólio. Aqui misturo código limpo com personalidade forte. Espero que aprecie a experiência!"
-        </p>
-
-        {/* Botão de Ação */}
-        <button
-          onClick={handleEnter}
-          className={`
-            mt-8 px-8 py-3 text-lg font-bold transition-all duration-300 transform hover:scale-105 active:scale-95
-            ${isKawaii 
-              ? 'bg-pink-400 text-white rounded-full shadow-lg hover:bg-pink-500 hover:shadow-pink-300/50' 
-              : 'border border-accent text-accent hover:bg-accent hover:text-black rounded-none tracking-widest uppercase'}
-          `}
-        >
-          {isKawaii ? 'Começar a Explorar 💖' : '[ ENTER_SYSTEM ]'}
-        </button>
+      {/* Background Effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-[-5%] left-[-5%] w-[50%] h-[50%] rounded-full blur-[100px] opacity-30 ${currentIsKawaii ? 'bg-pink-300' : 'bg-red-900'}`} />
+        <div className={`absolute bottom-[-5%] right-[-5%] w-[50%] h-[50%] rounded-full blur-[100px] opacity-30 ${currentIsKawaii ? 'bg-pink-300' : 'bg-red-900'}`} />
       </div>
 
-      {/* Dica de rodapé opcional */}
-      <div className="absolute bottom-10 opacity-50 text-sm">
-        {isKawaii ? 'Feito com amor e café ☕' : 'v1.0.0 // PRODUCTION_READY'}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        // MUDANÇA AQUI: text-center apenas no kawaii, text-left no goth
+        className={`
+          relative max-w-2xl w-full transition-all duration-500 overflow-hidden
+          ${currentIsKawaii 
+            ? 'bg-white border-[#EEAAC3] rounded-[3rem] shadow-[16px_16px_0px_#D86487] p-10 md:p-16 text-center' 
+            : 'bg-[#0a0a0a]/90 backdrop-blur-xl border-[#520815] rounded-lg shadow-[0_0_50px_rgba(210,4,45,0.15)] p-0 text-left'}
+        `}
+      >
+        {/* NOVO: Barra de Título do Terminal para o modo Goth */}
+        {!currentIsKawaii && (
+          <div className="bg-[#520815]/30 border-b border-[#520815] p-3 flex items-center gap-2">
+            <Terminal size={16} className="text-[#D2042D]" />
+            <span className="font-mono text-xs text-[#D2042D] opacity-70">root@portfolio:~</span>
+          </div>
+        )}
+
+        <div className={`${!currentIsKawaii ? 'p-10 md:p-16' : ''} space-y-10`}>
+          <div className="space-y-4">
+            {/* MUDANÇA AQUI: Fonte mono e tracking para o modo Goth */}
+            <h2 className={`text-3xl md:text-5xl font-bold mb-4 ${currentIsKawaii ? 'font-cute text-[#D86487] tracking-tighter' : 'font-mono text-[#D2042D] tracking-wider uppercase'}`}>
+              {currentIsKawaii ? 'Oie! Bem-vinde! ✨' : '>> ACCESS_GRANTED'}
+            </h2>
+
+            <div className={`h-1.5 rounded-full w-24 ${currentIsKawaii ? 'bg-[#EEAAC3] mx-auto' : 'bg-[#D2042D]'}`} />
+          </div>
+
+          <p className={`text-lg md:text-xl leading-relaxed ${currentIsKawaii ? 'font-sans text-[#76172C] font-bold' : 'font-code text-gray-400'}`}>
+            {currentIsKawaii 
+              ? "Preparei este cantinho com muito amor para mostrar meus projetos e as coisas que eu amo. Vamos ver?" 
+              : "Identidade confirmada. Bem-vinda ao core do sistema, onde código e dados se encontram."}
+          </p>
+
+          <button
+            onClick={onEnter}
+            // MUDANÇA AQUI: Alinhamento do botão
+            className={`
+              group relative mt-8 px-12 py-4 text-xl font-black transition-all duration-300 transform active:scale-95
+              ${currentIsKawaii 
+                ? 'bg-[#D86487] text-white rounded-full shadow-[0_6px_0_#EEAAC3] hover:shadow-none hover:translate-y-1 w-full md:w-auto' 
+                : 'bg-transparent border-2 border-[#D2042D] text-[#D2042D] hover:bg-[#D2042D] hover:text-black rounded-sm tracking-[0.2em] uppercase w-full'}
+            `}
+          >
+            <span className="flex items-center justify-center gap-2">
+              {currentIsKawaii ? <>Explorar <Sparkles size={20}/></> : '[ EXECUTE_SESSION ]'}
+            </span>
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Footer */}
+      <div className={`absolute bottom-10 flex items-center gap-2 text-sm font-code font-bold ${currentIsKawaii ? 'text-[#D86487]' : 'text-gray-500'}`}>
+        <span className="w-2.5 h-2.5 rounded-full bg-current animate-pulse" />
+        {currentIsKawaii ? '✿ Magical Girl Mode ON ✿' : 'SYSTEM_STABLE // v1.0.5'}
       </div>
-    </div>
+    </motion.div>
   );
 };

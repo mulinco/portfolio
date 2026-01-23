@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Skull, Heart, MessageCircle } from 'lucide-react';
-
+import { motion } from "framer-motion";
 
 interface HeroCardProps {
   fact: string | null;
@@ -10,6 +10,12 @@ interface HeroCardProps {
 
 export const HeroCard = ({ fact, currentIcon, onTriggerSecret }: HeroCardProps) => {
   return (
+    <motion.div 
+      initial={{ opacity: 0, x: 30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="flex flex-col gap-4" 
+    >
     <div className="flex justify-center md:justify-end h-full items-center">
       
       {/* === O WRAPPER (ENVOLTÓRIO) === 
@@ -98,5 +104,6 @@ export const HeroCard = ({ fact, currentIcon, onTriggerSecret }: HeroCardProps) 
         </button>
       </div>
     </div>
+    </motion.div>
   );
 };
