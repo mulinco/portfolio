@@ -83,9 +83,8 @@ export const WelcomeScreen = ({ isKawaii: propIsKawaii, onEnter }: WelcomeScreen
 
           <button
             onClick={onEnter}
-            // MUDANÇA AQUI: Alinhamento do botão
             className={`
-              group relative mt-8 px-12 py-4 text-xl font-black transition-all duration-300 transform active:scale-95
+              cursor-target group relative mt-8 px-12 py-4 text-xl font-black transition-all duration-300 transform active:scale-95
               ${currentIsKawaii 
                 ? 'bg-[#D86487] text-white rounded-full shadow-[0_6px_0_#EEAAC3] hover:shadow-none hover:translate-y-1 w-full md:w-auto' 
                 : 'bg-transparent border-2 border-[#D2042D] text-[#D2042D] hover:bg-[#D2042D] hover:text-black rounded-sm tracking-[0.2em] uppercase w-full'}

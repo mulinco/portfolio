@@ -1,40 +1,20 @@
-import { useEffect, useState } from 'react';
+// src/components/ui/ThemeToggle.tsx
 import { Skull, Heart, Sparkles } from 'lucide-react'; 
 
-export const ThemeToggle = () => {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        return savedTheme;
-      }
-      const hour = new Date().getHours();
-      const isDay = hour >= 6 && hour < 18;
-      return isDay ? 'kawaii' : 'goth';
-    }
-    return 'goth';
-  });
+interface ThemeToggleProps {
+  isKawaii: boolean;
+  toggleTheme: () => void;
+}
 
-  useEffect(() => {
-    const body = document.body;
-    if (theme === 'kawaii') {
-      body.classList.add('kawaii');
-      localStorage.setItem('theme', 'kawaii');
-    } else {
-      body.classList.remove('kawaii');
-      localStorage.setItem('theme', 'goth');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'goth' ? 'kawaii' : 'goth');
-  };
+export const ThemeToggle = ({ isKawaii, toggleTheme }: ThemeToggleProps) => {
+  // O tema agora vem lá do App.tsx via props
+  const theme = isKawaii ? 'kawaii' : 'goth';
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={toggleTheme} // Usa a função que vem do App.tsx
       className={`
-        relative overflow-hidden flex items-center gap-2 px-4 py-2 
+        cursor-target relative overflow-hidden flex items-center gap-2 px-4 py-2 
         border-2 transition-all duration-500 ease-in-out group
         ${theme === 'goth' 
           ? 'bg-transparent border-accent text-accent hover:bg-accent hover:text-bg-primary rounded-sm' 

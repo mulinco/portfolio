@@ -39,8 +39,6 @@ const petCardVariants: Variants = {
 
 export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps) => {
   const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
-  
-  // 1. LÓGICA DE AUTO-DETECÇÃO (Igual à Timeline para não falhar)
   const [currentIsKawaii, setCurrentIsKawaii] = useState(propIsKawaii);
 
   useEffect(() => {
@@ -65,7 +63,7 @@ export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps)
       birthDate: "2025-05-03", 
       gothDesc: "Unidade de interceptação de alta energia. Especialista em neutralização de calçados e monitoramento de perímetro.",
       kawaiiDesc: "Um gigante de caramelo que ama ganhar beijinhos e é o melhor amigo da Vênus!",
-      skills: ["Proteção", "Soneca Estratégica", "Olhar de Pidão", "Sir Ogro", "Ama a Vênus", "Amor Inigualável" ]
+      skills: ["Proteção", "Soneca Estratégica", "Olhar de Pidão", "Sir Ogro", "Ama a Vênus", "Amor Inigualável"]
     },
     { 
       name: "Vênus", 
@@ -75,7 +73,7 @@ export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps)
       birthDate: "2020-01-13", 
       gothDesc: "Analista de comportamento. Exige tributos em afeto e realiza auditoria constante na zona de alimentação (cozinha).",
       kawaiiDesc: "A rainha da casa! Adora fazer um drama por petisco e é a inteligência por trás do caos.",
-      skills: ["Auditoria", "Drama Nível 100", "Salto Ornamental", "Lady Delicadeza", "Odeia o Jupi", "Amor incondicional" ]
+      skills: ["Auditoria", "Drama Nível 100", "Salto Ornamental", "Lady Delicadeza", "Odeia o Jupi", "Amor incondicional"]
     }
   ];
 
@@ -92,24 +90,35 @@ export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps)
   };
 
   return (
-    <section className={`py-24 relative overflow-hidden transition-colors duration-500 ${currentIsKawaii ? 'bg-pink-50/30' : 'bg-transparent'}`}>
+    <section className={`py-24 relative overflow-hidden transition-colors duration-500 ${currentIsKawaii ? 'bg-transparent' : 'bg-transparent'}`}>
       
-      {/* CABEÇALHO PERSONALIZADO */}
+      {/* 🚀 CABEÇALHO COM TODOS OS ÍCONES UTILIZADOS */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         whileInView={isStarted ? { opacity: 1, y: 0 } : {}}
         viewport={{ once: true }}
         className="text-center mb-20 space-y-4"
       >
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center items-center gap-6 mb-4">
             {currentIsKawaii ? (
-                <Sparkles className="text-pink-400 animate-pulse" size={40} />
+                <>
+                  <Heart className="text-pink-400 animate-pulse" size={24} />
+                  <div className="relative">
+                    <PawPrint className="text-pink-500 animate-bounce" size={48} />
+                    <Sparkles className="absolute -top-2 -right-4 text-pink-300 animate-pulse" size={20} />
+                  </div>
+                  <Heart className="text-pink-400 animate-pulse" size={24} />
+                </>
             ) : (
-                <Shield className="text-accent animate-pulse" size={40} />
+                <>
+                  <Database className="text-accent/30" size={24} />
+                  <Shield className="text-accent animate-pulse" size={48} />
+                  <Database className="text-accent/30" size={24} />
+                </>
             )}
         </div>
         
-        <h2 className={`text-4xl md:text-6xl font-display uppercase tracking-tight ${currentIsKawaii ? 'text-[#D86487] font-cute' : 'text-accent font-black'}`}>
+        <h2 className={`text-4xl md:text-6xl font-bold uppercase tracking-tight ${currentIsKawaii ? 'text-[#D86487] font-cute' : 'text-accent font-bold'}`}>
           {currentIsKawaii ? 'Meus Filhos' : 'BIO_DATA: CANINE_LOG'}
         </h2>
         
@@ -130,7 +139,7 @@ export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps)
           <motion.div 
             key={index}
             variants={petCardVariants}
-            className="w-full max-w-[400px] cursor-pointer"
+            className="cursor-target w-full max-w-[400px] cursor-pointer"
             onClick={() => setSelectedPet(pet)} 
           >
             <div className={`
@@ -167,7 +176,7 @@ export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps)
       {/* MODAL PERSONALIZADO */}
       <AnimatePresence>
         {selectedPet && (
-          <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+          <div className="cursor-target fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={() => setSelectedPet(null)}>
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -175,7 +184,7 @@ export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps)
               className={`relative w-full max-w-lg p-10 shadow-2xl border-2 ${currentIsKawaii ? 'bg-white rounded-[3.5rem] border-[#EEAAC3]' : 'bg-bg-secondary rounded-[2.5rem] border-accent'}`}
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={() => setSelectedPet(null)} className="absolute top-8 right-8 text-text-secondary hover:text-accent transition-colors">
+              <button onClick={() => setSelectedPet(null)} className="cursor-target absolute top-8 right-8 text-text-secondary hover:text-accent transition-colors">
                 <X size={36} />
               </button>
 
@@ -184,7 +193,7 @@ export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps)
                   <img 
                     src={selectedPet.image} 
                     alt={selectedPet.name}
-                    className={`w-full h-full object-cover border-4 rounded-full ${currentIsKawaii ? 'border-[#EEAAC3]' : 'border-accent'}`}
+                    className={`cursor-target w-full h-full object-cover border-4 rounded-full ${currentIsKawaii ? 'border-[#EEAAC3]' : 'border-accent'}`}
                   />
                 </div>
                 
@@ -210,7 +219,7 @@ export const PetSlider = ({ isKawaii: propIsKawaii, isStarted }: PetSliderProps)
 
                   <div>
                     <h4 className={`text-xs font-bold uppercase mb-3 ${currentIsKawaii ? 'text-[#D86487]' : 'text-accent'}`}>{currentIsKawaii ? 'Poderes Mágicos' : 'SPECIAL_SKILLS'}</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="cursor-target flex flex-wrap gap-2">
                       {selectedPet.skills.map((skill, idx) => (
                         <span key={idx} className={`px-4 py-1.5 text-[10px] font-bold border ${currentIsKawaii ? 'bg-white border-[#EEAAC3] text-[#D86487] rounded-full' : 'bg-accent/5 border-accent/30 text-accent rounded-lg'}`}>
                           {skill}

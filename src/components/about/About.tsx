@@ -94,12 +94,12 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
   const scrollItems = tools.map((tool, index) => (
     <div key={index} className={`flex items-center gap-2 px-4 py-2 border rounded-md backdrop-blur-sm ${currentIsKawaii ? 'bg-white/50 border-[#EEAAC3]' : 'bg-bg-secondary/30 border-accent/10'}`}>
       <span className="text-accent text-[8px] animate-pulse">●</span>
-      <span className={`font-code text-sm font-bold uppercase tracking-wider ${currentIsKawaii ? 'text-[#76172C]' : 'text-text-secondary opacity-80'}`}>{tool}</span>
+      <span className={`cursor-target font-code text-sm font-bold uppercase tracking-wider ${currentIsKawaii ? 'text-[#76172C]' : 'text-text-secondary opacity-80'}`}>{tool}</span>
     </div>
   ));
 
   return (
-    <section className={`relative py-20 overflow-hidden transition-colors duration-500 font-sans ${currentIsKawaii ? 'bg-pink-50/30' : 'bg-bg-primary'}`}>
+    <section className={`relative py-20 overflow-hidden transition-colors duration-500 font-sans ${currentIsKawaii ? 'bg-transparent' : 'bg-transparent'}`}>
       
       {/* Texto Decorativo de Fundo */}
       <div className="absolute top-10 left-0 w-full overflow-hidden leading-none select-none opacity-[0.03] kawaii:opacity-[0.05] pointer-events-none">
@@ -147,7 +147,7 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
             className="grid grid-cols-2 gap-4"
           >
             {skills.map((skill, index) => (
-              <motion.div key={index} variants={skillItemVariants} onClick={() => setSelectedSkill(skill)} className="h-full group cursor-pointer">
+              <motion.div key={index} variants={skillItemVariants} onClick={() => setSelectedSkill(skill)} className="cursor-target h-full group cursor-pointer">
                 <SpotlightCard className="h-full hover:-translate-y-1 transition-transform duration-500" spotlightColor="var(--spotlight-color)">
                   <div className="p-6 flex flex-col gap-3 h-full relative z-20">
                     <div className="text-accent mb-2 group-hover:scale-110 transition-transform duration-300">
@@ -202,7 +202,7 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
               initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
               className={`relative bg-bg-secondary w-full max-w-lg p-8 shadow-2xl border-2 border-accent ${currentIsKawaii ? 'rounded-[3rem]' : 'rounded-xl'}`}
             >
-              <button onClick={() => setSelectedSkill(null)} className="absolute top-4 right-4 text-text-secondary hover:text-accent"><X size={28} /></button>
+              <button onClick={() => setSelectedSkill(null)} className="cursor-target absolute top-4 right-4 text-text-secondary hover:text-accent"><X size={28} /></button>
               <h3 className="font-bold text-3xl text-text-primary mb-4">{selectedSkill.name}</h3>
               <p className="text-text-secondary leading-relaxed mb-6">{selectedSkill.description}</p>
               <div className="flex flex-wrap gap-2">

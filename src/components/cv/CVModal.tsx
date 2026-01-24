@@ -93,7 +93,7 @@ export const CVModal = ({ isOpen, onClose }: CVModalProps) => {
 
           <button 
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-bg-primary transition-colors text-text-secondary hover:text-accent"
+            className="cursor-target p-2 rounded-full hover:bg-bg-primary transition-colors text-text-secondary hover:text-accent"
           >
             <FaTimes size={24} />
           </button>

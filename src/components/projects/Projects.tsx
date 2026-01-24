@@ -134,7 +134,7 @@ export const Projects = ({ isStarted }: ProjectsProps) => {
             <TiltCard className="h-full">
               <div 
                 onClick={() => setSelectedProject(project)}
-                className="h-full group relative cursor-pointer bg-bg-secondary border border-accent/20 rounded-xl kawaii:rounded-[2rem] p-6 hover:border-accent transition-all duration-300 flex flex-col"
+                className="cursor-target h-full group relative cursor-pointer bg-bg-secondary border border-accent/20 rounded-xl kawaii:rounded-[2rem] p-6 hover:border-accent transition-all duration-300 flex flex-col"
               >
                 <div className="flex justify-between items-start mb-6" style={{ transform: "translateZ(20px)" }}>
                   <div className="p-3 bg-bg-primary rounded-lg text-accent group-hover:scale-110 transition-transform">
@@ -172,17 +172,17 @@ export const Projects = ({ isStarted }: ProjectsProps) => {
       {/* Modal de Detalhes com AnimatePresence */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+          <div className="cursor-target fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 50 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative bg-bg-secondary w-full max-w-2xl border border-accent shadow-2xl overflow-hidden flex flex-col max-h-[90vh] rounded-xl kawaii:rounded-[2.5rem]"
+              className="cursor-target relative bg-bg-secondary w-full max-w-2xl border border-accent shadow-2xl overflow-hidden flex flex-col max-h-[90vh] rounded-xl kawaii:rounded-[2.5rem]"
             >
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-10 p-2 bg-bg-primary/50 rounded-full text-text-primary hover:text-accent transition-all"
+                className="cursor-target absolute top-4 right-4 z-10 p-2 bg-bg-primary/50 rounded-full text-text-primary hover:text-accent transition-all"
               >
                 <X size={24} />
               </button>

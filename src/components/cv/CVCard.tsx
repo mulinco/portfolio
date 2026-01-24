@@ -53,6 +53,7 @@ export const CVCard = ({ onClick }: CVCardProps) => {
 
       {/* --- BOTÃO PADRONIZADO (Usando Variáveis) --- */}
       <button className="
+        cursor-target
         w-full py-3 px-4 font-bold text-sm tracking-wider uppercase 
         flex items-center justify-center gap-2 
         transition-all duration-300

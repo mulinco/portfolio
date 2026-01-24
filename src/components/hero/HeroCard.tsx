@@ -88,6 +88,7 @@ export const HeroCard = ({ fact, currentIcon, onTriggerSecret }: HeroCardProps) 
         <button 
           onClick={onTriggerSecret} 
           className={`
+             cursor-target
              absolute -bottom-4 -right-2 md:bottom-4 md:-right-4 z-50 
              cursor-pointer bg-gray-900 border-2 border-accent p-3 rounded-full shadow-[0_0_25px_var(--accent)] 
              transition-all duration-500 transform group-hover:scale-110

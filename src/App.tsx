@@ -9,73 +9,69 @@ import { PetSlider } from './components/pets/PetSlider';
 import { Footer } from './components/layout/Footer';
 import { ScrollProgress } from './components/ui/ScrollProgress';
 import { WelcomeScreen } from './components/ui/WelcomeScreen';
+import { ClickSpark } from './components/ui/ClickSpark';
+import { Iridescence } from './components/ui/Iridescence';
+import TargetCursor from './components/ui/TargetCursor';
 
 function App() {
-  // 1. Verifica se já entrou na sessão para evitar repetir a intro
   const [isSystemReady, setIsSystemReady] = useState(false);
-
-
   const [isKawaii, setIsKawaii] = useState(() => {
-    const savedTheme = localStorage.getItem('app-theme');
-    return savedTheme === 'kawaii';
+    return localStorage.getItem('app-theme') === 'kawaii';
   });
 
-  // 2. Controla o bloqueio do scroll enquanto a WelcomeScreen está ativa
-  useEffect(() => {
-    if (!isSystemReady) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isSystemReady]);
+  // 🎨 CORES RADICAIS (Teste de Prova)
+const bgColor: [number, number, number] = isKawaii 
+  ? [1.0, 1.0, 0.8]  
+  : [0.2, 0.01, 0.02]; 
 
-  const handleEnterSystem = () => {
-    sessionStorage.setItem('hasSeenIntro', 'true');
-    setIsSystemReady(true);
-  };
+  useEffect(() => {
+    localStorage.setItem('app-theme', isKawaii ? 'kawaii' : 'goth');
+    document.body.className = isKawaii ? 'kawaii' : 'goth';
+    document.body.style.backgroundColor = 'transparent';
+    
+  }, [isKawaii]);
 
   const toggleTheme = () => {
+    console.log("Tema mudou! isKawaii agora é:", !isKawaii);
     setIsKawaii(!isKawaii);
   };
 
   return (
-    <main className="bg-goth-bg min-h-screen text-goth-text font-sans selection:bg-goth-pink selection:text-black transition-colors duration-500 kawaii:bg-pink-50">
-      
-      {/* 3. Gerenciamento da WelcomeScreen com saída suave */}
+    <main className={`min-h-screen text-goth-text font-sans transition-all duration-700 ${isKawaii ? 'kawaii' : ''} bg-transparent relative`}>
+      <TargetCursor isKawaii={isKawaii} />
+      {/* O FUNDO ANIMADO */}
+      <Iridescence 
+      key={isKawaii ? 'kawaii-v3' : 'goth-blood-v1'}
+      color={bgColor}
+      speed={isKawaii ? 0.3 : 0.8} 
+      amplitude={isKawaii ? 0.02 : 0.08} 
+      />
+
+      {isKawaii && <ClickSpark sparkColor='#D86487' />}
+
       <AnimatePresence mode="wait">
         {!isSystemReady && (
           <WelcomeScreen 
             key="welcome"
             isKawaii={isKawaii} 
-            onEnter={handleEnterSystem} 
+            onEnter={() => setIsSystemReady(true)} 
           />
         )}
       </AnimatePresence>
 
-      <ScrollProgress />
-      <Header isKawaii={isKawaii} toggleTheme={toggleTheme} />
-      
-      {/* 4. Seções principais com gatilho de animação isStarted */}
-      <Hero isStarted={isSystemReady} />
-      
-      <section id="skills" className="scroll-mt-28">
-        <About isKawaii={isKawaii} isStarted={isSystemReady} />
-      </section>
-
-      <section className="container mx-auto px-4 py-10">
-         <LifeTimeline isKawaii={isKawaii} isStarted={isSystemReady} />
-      </section>
-      
-      <section id="projetos" className="scroll-mt-28">
-        <Projects isStarted={isSystemReady} />
-      </section>
-      
-      <PetSlider isKawaii={isKawaii} isStarted={isSystemReady} />
-      
-      <section id="contato" className="scroll-mt-28">
-        <Footer />
-      </section>
-      
+      <div className="relative z-10">
+        <ScrollProgress />
+        <Header isKawaii={isKawaii} toggleTheme={toggleTheme} />
+        
+        <div className={!isSystemReady ? 'opacity-0' : 'opacity-100 transition-opacity duration-1000'}>
+          <Hero isStarted={isSystemReady} />
+          <About isKawaii={isKawaii} isStarted={isSystemReady} />
+          <LifeTimeline isKawaii={isKawaii} isStarted={isSystemReady} />
+          <Projects isStarted={isSystemReady} />
+          <PetSlider isKawaii={isKawaii} isStarted={isSystemReady} />
+          <Footer isKawaii={isKawaii} />
+        </div>
+      </div>
     </main>
   );
 }
