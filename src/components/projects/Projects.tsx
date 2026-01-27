@@ -110,7 +110,7 @@ export const Projects = ({ isStarted, isKawaii: propIsKawaii }: ProjectsProps) =
       shortDescription: "Hub de links mobile-first com animações GSAP fluidas.",
       longDescription: "Landing page de alta performance desenvolvida para superar agregadores comuns com foco em branding.",
       techs: ["Next.js 14", "TypeScript", "GSAP", "Tailwind"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop", 
+      image: "/preview.png", 
       github: "https://github.com/mulinco/linktree-agatha",
       demo: "https://linktree-agatha.vercel.app"
     },
@@ -133,7 +133,17 @@ export const Projects = ({ isStarted, isKawaii: propIsKawaii }: ProjectsProps) =
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop", 
       github: "https://github.com/mulinco/squad-da-dieta",
       demo: "https://github.com/mulinco/squad-da-dieta"
-    }
+    },
+    {
+  title: "BioLinks Carol Sant'Anna",
+  type: "Frontend",
+  shortDescription: "Agregador de links premium com background procedural (Silk) e estética postal.",
+  longDescription: "Projeto de branding digital para fotografia afetiva. Utiliza shaders em Three.js para o efeito Silk e máscaras CSS complexas para simular selos postais, focado em alta performance e design autoral.",
+  techs: ["Next.js 16", "Three.js", "GSAP", "Tailwind CSS"],
+  image: "/preview-carol.png", 
+  github: "https://github.com/mulinco/linktree-carol",
+  demo: "https://linktree-carol.vercel.app"
+}
   ];
 
   return (
