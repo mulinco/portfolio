@@ -41,7 +41,7 @@ const STYLES = {
     electricRadius: 40 
   },
   goth: {
-    cardBg: "bg-black/40",       
+    cardBg: "bg-black/80",       
     cardBorder: "border-accent/20",  
     cardShadow: "shadow-[0_0_20px_rgba(210,4,45,0.1)]", 
     fontTitle: "font-code font-bold text-xl tracking-tighter", 
