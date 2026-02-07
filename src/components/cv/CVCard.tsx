@@ -1,4 +1,4 @@
-import { FaUserAstronaut, FaHeart, FaEye } from 'react-icons/fa';
+import { FaUserAstronaut, FaHeart, FaEye } from "react-icons/fa";
 
 interface CVCardProps {
   onClick: () => void;
@@ -6,7 +6,7 @@ interface CVCardProps {
 
 export const CVCard = ({ onClick }: CVCardProps) => {
   return (
-    <div 
+    <div
       onClick={onClick}
       className="
         group relative cursor-pointer w-full max-w-sm mx-auto
@@ -32,15 +32,19 @@ export const CVCard = ({ onClick }: CVCardProps) => {
     >
       {/* Ícone e Badge */}
       <div className="mb-4 flex justify-between items-start">
-        <div className="
+        <div
+          className="
           p-3 rounded-lg text-3xl 
           /* Fundo do ícone usa a cor primária do tema */
           bg-bg-primary text-accent
-        ">
+        "
+        >
           <FaUserAstronaut className="kawaii:hidden" />
           <FaHeart className="hidden kawaii:block animate-pulse" />
         </div>
-        <span className="text-xs font-mono opacity-60 text-text-secondary">.PDF</span>
+        <span className="text-xs font-mono opacity-60 text-text-secondary">
+          .PDF
+        </span>
       </div>
 
       {/* Textos usando as variáveis de tipografia e cor */}
@@ -48,11 +52,13 @@ export const CVCard = ({ onClick }: CVCardProps) => {
         Meu Currículo
       </h3>
       <p className="text-sm font-sans mb-6 text-text-secondary">
-        Clique para visualizar minhas experiências, formação e histórico profissional.
+        Clique para visualizar minhas experiências, formação e histórico
+        profissional.
       </p>
 
       {/* --- BOTÃO PADRONIZADO (Usando Variáveis) --- */}
-      <button className="
+      <button
+        className="
         cursor-target
         w-full py-3 px-4 font-bold text-sm tracking-wider uppercase 
         flex items-center justify-center gap-2 
@@ -67,7 +73,8 @@ export const CVCard = ({ onClick }: CVCardProps) => {
         
         /* INTERAÇÃO */
         hover:shadow-lg kawaii:hover:scale-[1.02]
-      ">
+      "
+      >
         <FaEye /> Abrir Visualizador
       </button>
     </div>

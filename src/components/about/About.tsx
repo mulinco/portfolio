@@ -1,14 +1,22 @@
-import { useState, useMemo, useEffect } from 'react';
-import { Code, Database, Layout, Sparkles, X, Bot, GitBranch } from 'lucide-react';
-import { CVCard } from '../cv/CVCard';
-import { CVModal } from '../cv/CVModal';
-import InfiniteScroll from '../ui/InfiniteScroll'; 
+import { useState, useMemo, useEffect } from "react";
+import {
+  Code,
+  Database,
+  Layout,
+  Sparkles,
+  X,
+  Bot,
+  GitBranch,
+} from "lucide-react";
+import { CVCard } from "../cv/CVCard";
+import { CVModal } from "../cv/CVModal";
+import InfiniteScroll from "../ui/InfiniteScroll";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { GenericCard } from '../ui/GenericCard';
+import { GenericCard } from "../ui/GenericCard";
 
 interface Skill {
   name: string;
-  icon: React.ReactNode; 
+  icon: React.ReactNode;
   level: string;
   percentage: string;
   description: string;
@@ -26,31 +34,36 @@ const textContainerVariants: Variants = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.15, delayChildren: 0.2 }
-  }
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
 };
 
 const textItemVariants: Variants = {
   hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 }
+  visible: { opacity: 1, x: 0 },
 };
 
 const gridContainerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.3 }
-  }
+    transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+  },
 };
 
 const skillItemVariants: Variants = {
   hidden: { opacity: 0, scale: 0.9, y: 20 },
-  visible: { 
-    opacity: 1, 
-    scale: 1, 
+  visible: {
+    opacity: 1,
+    scale: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" } 
-  }
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
@@ -60,7 +73,7 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
 
   useEffect(() => {
     const checkTheme = () => {
-      setCurrentIsKawaii(document.body.classList.contains('kawaii'));
+      setCurrentIsKawaii(document.body.classList.contains("kawaii"));
     };
     const observer = new MutationObserver(() => checkTheme());
     observer.observe(document.body, { attributes: true });
@@ -68,7 +81,7 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
     return () => observer.disconnect();
   }, []);
 
-  const MY_BIRTHDAY = "1998-06-13"; 
+  const MY_BIRTHDAY = "1998-06-13";
   const myAge = useMemo(() => {
     const birthDate = new Date(MY_BIRTHDAY);
     const today = new Date();
@@ -79,20 +92,85 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
   }, []);
 
   const skills: Skill[] = [
-    { name: 'Python', icon: <Code />, level: 'Intermediário', percentage: '65%', description: "Minha linguagem principal. Focada em análise de dados e bioinformática.", techs: ["Pandas", "BioPython", "Streamlit", "Automação"] },
-    { name: 'React', icon: <Layout />, level: 'Em Aprendizado', percentage: '50%', description: "Desenvolvimento de SPAs modernas com foco em componentes reutilizáveis.", techs: ["Hooks", "Vite", "Context API", "Tailwind"] },
-    { name: 'Tailwind', icon: <Sparkles />, level: 'Prático', percentage: '70%', description: "Estilização rápida e responsiva com foco em design utilitário.", techs: ["Layouts", "Grid/Flex", "Dark Mode"] },
-    { name: 'SQL', icon: <Database />, level: 'Básico', percentage: '40%', description: "Modelagem de bancos de dados relacionais e consultas analíticas.", techs: ["PostgreSQL", "Selects", "Joins"] },
-    { name: 'AI Co-Pilot', icon: <Bot />, level: 'Estratégico', percentage: '85%', description: "Uso avançado de IAs para aumento de produtividade e debugging.", techs: ["Prompting", "Refatoração", "Documentação"] },
-    { name: 'Git & GitHub', icon: <GitBranch />, level: 'Essencial', percentage: '60%', description: "Versionamento de código e colaboração em equipe.", techs: ["Branches", "Commits", "PRs"] },
+    {
+      name: "Python",
+      icon: <Code />,
+      level: "Intermediário",
+      percentage: "65%",
+      description:
+        "Minha linguagem principal. Focada em análise de dados e bioinformática.",
+      techs: ["Pandas", "BioPython", "Streamlit", "Automação"],
+    },
+    {
+      name: "React",
+      icon: <Layout />,
+      level: "Em Aprendizado",
+      percentage: "50%",
+      description:
+        "Desenvolvimento de SPAs modernas com foco em componentes reutilizáveis.",
+      techs: ["Hooks", "Vite", "Context API", "Tailwind"],
+    },
+    {
+      name: "Tailwind",
+      icon: <Sparkles />,
+      level: "Prático",
+      percentage: "70%",
+      description:
+        "Estilização rápida e responsiva com foco em design utilitário.",
+      techs: ["Layouts", "Grid/Flex", "Dark Mode"],
+    },
+    {
+      name: "SQL",
+      icon: <Database />,
+      level: "Básico",
+      percentage: "40%",
+      description:
+        "Modelagem de bancos de dados relacionais e consultas analíticas.",
+      techs: ["PostgreSQL", "Selects", "Joins"],
+    },
+    {
+      name: "AI Co-Pilot",
+      icon: <Bot />,
+      level: "Estratégico",
+      percentage: "85%",
+      description:
+        "Uso avançado de IAs para aumento de produtividade e debugging.",
+      techs: ["Prompting", "Refatoração", "Documentação"],
+    },
+    {
+      name: "Git & GitHub",
+      icon: <GitBranch />,
+      level: "Essencial",
+      percentage: "60%",
+      description: "Versionamento de código e colaboração em equipe.",
+      techs: ["Branches", "Commits", "PRs"],
+    },
   ];
 
-  const tools = ["VS Code", "Pandas", "Streamlit", "Figma", "PostgreSQL", "Linux", "Vite", "TypeScript", "BioPython", "Vercel"];
+  const tools = [
+    "VS Code",
+    "Pandas",
+    "Streamlit",
+    "Figma",
+    "PostgreSQL",
+    "Linux",
+    "Vite",
+    "TypeScript",
+    "BioPython",
+    "Vercel",
+  ];
 
   const scrollItems = tools.map((tool, index) => (
-    <div key={index} className={`flex items-center gap-2 px-4 py-2 border rounded-md backdrop-blur-sm ${currentIsKawaii ? 'bg-white/50 border-[#EEAAC3]' : 'bg-bg-secondary/30 border-accent/10'}`}>
+    <div
+      key={index}
+      className={`flex items-center gap-2 px-4 py-2 border rounded-md backdrop-blur-sm ${currentIsKawaii ? "bg-white/50 border-[#EEAAC3]" : "bg-bg-secondary/30 border-accent/10"}`}
+    >
       <span className="text-accent text-[8px] animate-pulse">●</span>
-      <span className={`font-code text-sm font-bold uppercase tracking-wider ${currentIsKawaii ? 'text-[#76172C]' : 'text-text-secondary opacity-80'}`}>{tool}</span>
+      <span
+        className={`font-code text-sm font-bold uppercase tracking-wider ${currentIsKawaii ? "text-[#76172C]" : "text-text-secondary opacity-80"}`}
+      >
+        {tool}
+      </span>
     </div>
   ));
 
@@ -100,19 +178,19 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
 
   return (
     <section className="relative py-20 overflow-hidden font-sans">
-      
       {/* Texto Decorativo de Fundo */}
       <div className="absolute top-10 left-0 w-full overflow-hidden leading-none select-none opacity-[0.03] pointer-events-none">
-        <span className={`text-[15rem] md:text-[20rem] font-black uppercase ${currentIsKawaii ? 'font-cute tracking-tighter' : 'font-display'}`}>
-          {currentIsKawaii ? 'CREATIVE' : 'DEVELOPER'}
+        <span
+          className={`text-[15rem] md:text-[20rem] font-black uppercase ${currentIsKawaii ? "font-cute tracking-tighter" : "font-display"}`}
+        >
+          {currentIsKawaii ? "CREATIVE" : "DEVELOPER"}
         </span>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start"> 
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           {/* LADO ESQUERDO: BIO */}
-          <motion.div 
+          <motion.div
             variants={textContainerVariants}
             initial="hidden"
             whileInView="visible"
@@ -120,16 +198,27 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
             className="space-y-8"
           >
             <div className="space-y-6">
-              <motion.h2 variants={textItemVariants} className="text-4xl md:text-5xl font-display text-accent">
-                {currentIsKawaii ? 'Sobre mim' : 'About_Me'}
+              <motion.h2
+                variants={textItemVariants}
+                className="text-4xl md:text-5xl font-display text-accent"
+              >
+                {currentIsKawaii ? "Sobre mim" : "About_Me"}
               </motion.h2>
               <div className="font-code text-text-secondary text-lg leading-relaxed space-y-4">
                 <motion.p variants={textItemVariants}>
-                  <span className="text-accent font-bold">Maria Rodrigues.</span> {myAge} anos. 
-                  Troquei o jaleco pelo teclado, mas a mentalidade analítica continua a mesma.
+                  <span className="text-accent font-bold">
+                    Maria Rodrigues.
+                  </span>{" "}
+                  {myAge} anos. Troquei o jaleco pelo teclado, mas a mentalidade
+                  analítica continua a mesma.
                 </motion.p>
-                <motion.div variants={textItemVariants} className={`pt-4 border-l-4 border-accent pl-4 italic font-bold text-xl ${currentIsKawaii ? 'text-[#76172C]' : 'text-text-secondary'}`}>
-                  {currentIsKawaii ? "✨ Brilho por fora, código por dentro ✨" : '"Dark Mode por padrão. Kawaii por escolha."'}
+                <motion.div
+                  variants={textItemVariants}
+                  className={`pt-4 border-l-4 border-accent pl-4 italic font-bold text-xl ${currentIsKawaii ? "text-[#76172C]" : "text-text-secondary"}`}
+                >
+                  {currentIsKawaii
+                    ? "✨ Brilho por fora, código por dentro ✨"
+                    : '"Dark Mode por padrão. Kawaii por escolha."'}
                 </motion.div>
               </div>
             </div>
@@ -139,7 +228,7 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
           </motion.div>
 
           {/* LADO DIREITO: SKILLS (Cada uma com GenericCard) */}
-          <motion.div 
+          <motion.div
             variants={gridContainerVariants}
             initial="hidden"
             whileInView="visible"
@@ -147,29 +236,35 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
             className="grid grid-cols-2 gap-6"
           >
             {skills.map((skill, index) => (
-              <motion.div 
-                key={index} 
-                variants={skillItemVariants} 
+              <motion.div
+                key={index}
+                variants={skillItemVariants}
                 className="h-full"
               >
-                <GenericCard 
-                  isKawaii={currentIsKawaii} 
+                <GenericCard
+                  isKawaii={currentIsKawaii}
                   onClick={() => setSelectedSkill(skill)}
                 >
                   <div className="flex flex-col gap-3 h-full group cursor-pointer">
                     <div className="text-accent group-hover:scale-110 transition-transform duration-300">
                       {skill.icon}
                     </div>
-                    <h3 className={`font-bold font-code ${currentIsKawaii ? 'text-[#D86487]' : 'text-text-primary'}`}>
+                    <h3
+                      className={`font-bold font-code ${currentIsKawaii ? "text-[#D86487]" : "text-text-primary"}`}
+                    >
                       {skill.name}
                     </h3>
-                    
+
                     {/* Barra de Progresso */}
                     <div className="w-full bg-black/20 h-1.5 mt-auto rounded-full overflow-hidden border border-accent/10">
-                      <motion.div 
+                      <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: skill.percentage }}
-                        transition={{ duration: 1.5, delay: 0.6, ease: "circOut" }}
+                        transition={{
+                          duration: 1.5,
+                          delay: 0.6,
+                          ease: "circOut",
+                        }}
                         className="h-full bg-accent rounded-full"
                       />
                     </div>
@@ -182,43 +277,61 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
       </div>
 
       {/* INFINITE SCROLL */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="mt-20 pt-8 relative z-10"
       >
         <div className="flex items-center justify-center gap-4 mb-8 opacity-50">
-            <div className={`h-px w-12 md:w-32 ${currentIsKawaii ? 'bg-[#EEAAC3]' : 'bg-accent/30'}`}></div>
-            <span className={`font-code text-xs uppercase tracking-[0.3em] whitespace-nowrap ${currentIsKawaii ? 'text-[#D86487] font-bold' : 'text-text-secondary'}`}>
-              {currentIsKawaii ? '✿ Ferramentas Favoritas ✿' : 'Arsenal_&_Tools'}
-            </span>
-            <div className={`h-px w-12 md:w-32 ${currentIsKawaii ? 'bg-[#EEAAC3]' : 'bg-accent/30'}`}></div>
+          <div
+            className={`h-px w-12 md:w-32 ${currentIsKawaii ? "bg-[#EEAAC3]" : "bg-accent/30"}`}
+          ></div>
+          <span
+            className={`font-code text-xs uppercase tracking-[0.3em] whitespace-nowrap ${currentIsKawaii ? "text-[#D86487] font-bold" : "text-text-secondary"}`}
+          >
+            {currentIsKawaii ? "✿ Ferramentas Favoritas ✿" : "Arsenal_&_Tools"}
+          </span>
+          <div
+            className={`h-px w-12 md:w-32 ${currentIsKawaii ? "bg-[#EEAAC3]" : "bg-accent/30"}`}
+          ></div>
         </div>
 
-        <InfiniteScroll 
-          items={scrollItems} 
-          speed="normal" 
-          direction="left" 
-        />
+        <InfiniteScroll items={scrollItems} speed="normal" direction="left" />
       </motion.div>
 
       {/* MODAL DE DETALHES */}
       <AnimatePresence>
         {selectedSkill && (
           <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }} 
-              animate={{ opacity: 1, scale: 1 }} 
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className={`relative bg-bg-secondary w-full max-w-lg p-8 shadow-2xl border-2 border-accent ${currentIsKawaii ? 'rounded-[3rem]' : 'rounded-none'}`}
+              className={`relative bg-bg-secondary w-full max-w-lg p-8 shadow-2xl border-2 border-accent ${currentIsKawaii ? "rounded-[3rem]" : "rounded-none"}`}
             >
-              <button onClick={() => setSelectedSkill(null)} className="absolute top-4 right-4 text-text-secondary hover:text-accent"><X size={28} /></button>
-              <h3 className={`font-bold text-3xl mb-4 ${currentIsKawaii ? 'font-cute text-[#D86487]' : 'text-text-primary'}`}>{selectedSkill.name}</h3>
-              <p className="text-text-secondary leading-relaxed mb-6">{selectedSkill.description}</p>
+              <button
+                onClick={() => setSelectedSkill(null)}
+                className="absolute top-4 right-4 text-text-secondary hover:text-accent"
+              >
+                <X size={28} />
+              </button>
+              <h3
+                className={`font-bold text-3xl mb-4 ${currentIsKawaii ? "font-cute text-[#D86487]" : "text-text-primary"}`}
+              >
+                {selectedSkill.name}
+              </h3>
+              <p className="text-text-secondary leading-relaxed mb-6">
+                {selectedSkill.description}
+              </p>
               <div className="flex flex-wrap gap-2">
                 {selectedSkill.techs.map((t, i) => (
-                  <span key={i} className="text-xs px-3 py-1 bg-accent/10 text-accent rounded-full border border-accent/20">{t}</span>
+                  <span
+                    key={i}
+                    className="text-xs px-3 py-1 bg-accent/10 text-accent rounded-full border border-accent/20"
+                  >
+                    {t}
+                  </span>
                 ))}
               </div>
             </motion.div>

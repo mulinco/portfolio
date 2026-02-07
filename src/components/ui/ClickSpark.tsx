@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
 interface Spark {
   x: number;
@@ -17,7 +17,7 @@ interface ClickSparkProps {
 }
 
 export const ClickSpark = ({
-  sparkColor = '#00ff37', 
+  sparkColor = "#00ff37",
   sparkSize = 10,
   sparkRadius = 15,
   sparkCount = 12, // Aumentei um pouco para ficar mais visível
@@ -28,7 +28,7 @@ export const ClickSpark = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let sparks: Spark[] = [];
@@ -59,7 +59,7 @@ export const ClickSpark = ({
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       sparks = sparks.filter((s) => s.alpha > 0);
-      
+
       sparks.forEach((s) => {
         s.x += s.vx;
         s.y += s.vy;
@@ -75,16 +75,16 @@ export const ClickSpark = ({
       requestAnimationFrame(animate);
     };
 
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
     // 🚀 O 'true' aqui garante que o evento seja pego na descida (capture phase)
-    window.addEventListener('mousedown', handleMouseDown, true);
-    
+    window.addEventListener("mousedown", handleMouseDown, true);
+
     resize();
     animate();
 
     return () => {
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousedown', handleMouseDown, true);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousedown", handleMouseDown, true);
     };
   }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration]);
 
@@ -93,7 +93,7 @@ export const ClickSpark = ({
       ref={canvasRef}
       // z-[99999] para garantir que fique por cima de TUDO
       className="fixed inset-0 pointer-events-none z-[99999]"
-      style={{ background: 'transparent' }} // Removi o mix-blend-mode
+      style={{ background: "transparent" }} // Removi o mix-blend-mode
     />
   );
 };

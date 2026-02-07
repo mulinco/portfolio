@@ -3,7 +3,7 @@ interface NavigationProps {
 }
 
 export const Navigation = ({ links }: NavigationProps) => {
-  const safeLinks = links || []; 
+  const safeLinks = links || [];
 
   return (
     <nav className="flex items-center gap-8">
@@ -32,7 +32,8 @@ export const Navigation = ({ links }: NavigationProps) => {
 
           {/* --- EFEITO GOTH: A linha que cresce (Sliding Underline) --- */}
           {/* É um span absoluto que começa com largura 0 (w-0) e vai para 100% (w-full) no hover */}
-          <span className="
+          <span
+            className="
             absolute -bottom-0 left-0 
             w-0 h-[2px] 
             bg-accent 
@@ -41,7 +42,8 @@ export const Navigation = ({ links }: NavigationProps) => {
             
             /* Importante: Esconde essa linha reta no modo Kawaii para não conflitar com a ondinha */
             kawaii:hidden
-          "></span>
+          "
+          ></span>
         </a>
       ))}
     </nav>

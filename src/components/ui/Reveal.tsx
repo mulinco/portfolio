@@ -6,7 +6,12 @@ interface Props {
   delay?: number;
 }
 
-export const Reveal = ({ children, width = "fit-content", className, delay = 0.25 }: Props) => {
+export const Reveal = ({
+  children,
+  width = "fit-content",
+  className,
+  delay = 0.25,
+}: Props) => {
   return (
     <motion.div
       variants={{

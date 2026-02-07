@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface DecryptedTextProps {
   text: string;
@@ -8,13 +8,13 @@ interface DecryptedTextProps {
 
 export default function DecryptedText({
   text,
-  speed = 100, 
-  className = '',
+  speed = 100,
+  className = "",
 }: DecryptedTextProps) {
-  const [displayText, setDisplayText] = useState('');
-  
+  const [displayText, setDisplayText] = useState("");
+
   // 🧬 DNA puro + alguns caracteres tech para o "glitch"
-  const characters = 'ACGTACGTACGTACGTACGTACGTACGTACGT';
+  const characters = "ACGTACGTACGTACGTACGTACGTACGTACGT";
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -23,7 +23,7 @@ export default function DecryptedText({
     const generateScramble = (index: number) => {
       // Pega o pedaço que falta do texto e transforma em "lixo" aleatório
       const remainingLength = text.length - index;
-      let scramble = '';
+      let scramble = "";
       for (let i = 0; i < remainingLength; i++) {
         scramble += characters[Math.floor(Math.random() * characters.length)];
       }
@@ -40,7 +40,7 @@ export default function DecryptedText({
 
         // 1. Parte Decifrada (Correta até o índice atual)
         const decodedPart = text.slice(0, iteration);
-        
+
         // 2. Parte Embaralhada (O resto vira sopa de letrinhas)
         const scrambledPart = generateScramble(iteration);
 
@@ -53,9 +53,5 @@ export default function DecryptedText({
     return () => clearInterval(interval);
   }, [text, speed]);
 
-  return (
-    <span className={className}>
-      {displayText}
-    </span>
-  );
+  return <span className={className}>{displayText}</span>;
 }

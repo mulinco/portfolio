@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export const ScrollProgress = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -6,24 +6,25 @@ export const ScrollProgress = () => {
   useEffect(() => {
     const updateScroll = () => {
       // Calcula o total que pode ser rolado
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+
       // Calcula a posição atual
       const currentScroll = window.scrollY;
-      
+
       // Transforma em porcentagem (0 a 100)
       const progress = (currentScroll / totalHeight) * 100;
-      
+
       setScrollProgress(progress);
     };
 
-    window.addEventListener('scroll', updateScroll);
-    return () => window.removeEventListener('scroll', updateScroll);
+    window.addEventListener("scroll", updateScroll);
+    return () => window.removeEventListener("scroll", updateScroll);
   }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full h-1.5 z-[100]">
-      <div 
+      <div
         style={{ width: `${scrollProgress}%` }}
         className="
           h-full transition-all duration-100 ease-out

@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 interface MagneticWrapperProps {
   children: React.ReactNode;
@@ -7,20 +7,26 @@ interface MagneticWrapperProps {
   className?: string;
 }
 
-export default function MagneticWrapper({ 
-  children, 
+export default function MagneticWrapper({
+  children,
   strength = 0.5,
-  className = "" 
+  className = "",
 }: MagneticWrapperProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouse = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
-    
+
     // Pega as dimensões e posição do elemento na tela
-    const { height, width, left, top } = ref.current?.getBoundingClientRect() || { height: 0, width: 0, left: 0, top: 0 };
-    
+    const { height, width, left, top } =
+      ref.current?.getBoundingClientRect() || {
+        height: 0,
+        width: 0,
+        left: 0,
+        top: 0,
+      };
+
     // Calcula a distância do mouse para o centro do botão
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);

@@ -4,8 +4,6 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
-
-    /* 🚀 O QUE O SHADCN QUER VER */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

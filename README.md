@@ -10,7 +10,6 @@
 
 [![Deploy na Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://mulincodev.vercel.app)
 
-
 ---
 
 ## 🎨 Sobre o Projeto
@@ -18,6 +17,7 @@
 Este não é apenas um site estático. É uma aplicação **React Single Page Application (SPA)** projetada para demonstrar domínio sobre gerenciamento de estado, design systems e UX/UI moderna.
 
 O conceito central é a **Dualidade de Personalidade**:
+
 1.  **🌑 Modo Goth (Default):** Minimalismo, alto contraste e estética "Cyber-Dark".
 2.  **✨ Modo Kawaii (Toggle):** Cores pastéis, bordas arredondadas e uma experiência imersiva.
 
@@ -28,11 +28,13 @@ A troca de tema não altera apenas as cores (`colors`), mas reestrutura a geomet
 ## 🚀 Funcionalidades Técnicas
 
 ### ⚡ Core & Arquitetura
+
 - **React + TypeScript:** Tipagem rigorosa com Interfaces e Schemas customizados.
 - **Custom Hooks:** Lógica encapsulada em hooks próprios (`useTypewriter`, `useEasterEgg`) para manter os componentes limpos.
 - **Feature-Based Architecture:** Organização de pastas focada em funcionalidades (`hero`, `cv`, `pets`), facilitando a escalabilidade.
 
 ### 💅 UX & Interface
+
 - **Scroll Progress Bar:** Indicador de leitura visual que altera sua física conforme o tema.
 - **Glassmorphism & Neumorphism:** Uso intensivo de transparências e blur.
 - **Interações Ricas:**
@@ -41,6 +43,7 @@ A troca de tema não altera apenas as cores (`colors`), mas reestrutura a geomet
   - **Modais Detalhados:** Visualização profunda dos projetos sem recarregar a página.
 
 ### 🔍 SEO & Performance
+
 - **Open Graph (OG Tags):** Configurado para compartilhamento rico no WhatsApp e LinkedIn.
 - **Vite:** Build otimizado para alta performance e carregamento rápido.
 
@@ -48,13 +51,13 @@ A troca de tema não altera apenas as cores (`colors`), mas reestrutura a geomet
 
 ## 🛠️ Stack Tecnológico
 
-| Categoria | Tecnologias |
-|-----------|-------------|
-| **Frontend** | React 18, TypeScript, HTML5, CSS3 |
+| Categoria       | Tecnologias                         |
+| --------------- | ----------------------------------- |
+| **Frontend**    | React 18, TypeScript, HTML5, CSS3   |
 | **Estilização** | Tailwind CSS, Lucide React (Ícones) |
-| **Lógica** | Custom Hooks, Zod (Schemas) |
-| **Build** | Vite, PostCSS |
-| **Deploy** | Vercel |
+| **Lógica**      | Custom Hooks, Zod (Schemas)         |
+| **Build**       | Vite, PostCSS                       |
+| **Deploy**      | Vercel                              |
 
 ---
 
@@ -80,7 +83,9 @@ src/
 ```
 
 ---
+
 ## 🚧 Roadmap & Futuro
+
 Este projeto é um organismo vivo! 🧬 Embora a versão atual foque em Frontend e UX, tenho planos concretos para expandi-lo:
 
 - [ ] Integração de APIs: Conectar com a API do GitHub (para puxar repositórios automaticamente) e Spotify (para exibir "O que estou ouvindo").
@@ -94,6 +99,7 @@ Este projeto é um organismo vivo! 🧬 Embora a versão atual foque em Frontend
 ---
 
 ## 🧜‍♀️ A Autora
+
 ### Desenvolvido com 💜 (e muita coca-cola) por Maria Clara Rodrigues.
 
 - **Foco:** Desenvolvimento Full Stack & Análise de Dados.

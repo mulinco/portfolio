@@ -1,33 +1,31 @@
-import { ReactNode, useMemo } from 'react';
-
+import { ReactNode, useMemo } from "react";
 
 interface InfiniteScrollProps {
   items: ReactNode[];
-  speed?: 'slow' | 'normal' | 'fast';
-  direction?: 'left' | 'right';
+  speed?: "slow" | "normal" | "fast";
+  direction?: "left" | "right";
   className?: string;
 }
 
-export default function InfiniteScroll({ 
-  items, 
-  speed = 'normal', 
-  direction = 'left',
-  className = '' 
+export default function InfiniteScroll({
+  items,
+  speed = "normal",
+  direction = "left",
+  className = "",
 }: InfiniteScrollProps) {
-  
   const getAnimationClass = () => {
     // Mapeia todas as combinações possíveis
     const animationMap = {
-      'left-normal': 'animate-scroll-left',
-      'left-fast': 'animate-scroll-left-fast',
-      'left-slow': 'animate-scroll-left-slow',
-      'right-normal': 'animate-scroll-right',
-      'right-fast': 'animate-scroll-right-fast',
-      'right-slow': 'animate-scroll-right-slow',
+      "left-normal": "animate-scroll-left",
+      "left-fast": "animate-scroll-left-fast",
+      "left-slow": "animate-scroll-left-slow",
+      "right-normal": "animate-scroll-right",
+      "right-fast": "animate-scroll-right-fast",
+      "right-slow": "animate-scroll-right-slow",
     };
 
     const key = `${direction}-${speed}` as keyof typeof animationMap;
-    return animationMap[key] || 'animate-scroll-left';
+    return animationMap[key] || "animate-scroll-left";
   };
 
   // Mantemos o truque de quadruplicar a lista para telas grandes
@@ -42,7 +40,9 @@ export default function InfiniteScroll({
       <div className="absolute top-0 right-0 w-20 h-full z-10 bg-gradient-to-l from-bg-primary to-transparent" />
 
       {/* A Faixa que corre */}
-      <div className={`flex gap-8 py-4 whitespace-nowrap ${getAnimationClass()}`}>
+      <div
+        className={`flex gap-8 py-4 whitespace-nowrap ${getAnimationClass()}`}
+      >
         {multipliedItems.map((item, idx) => (
           <div key={idx} className="mx-4 flex items-center">
             {item}

@@ -1,144 +1,168 @@
 /* 1. Importando TODAS as fontes */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&family=UnifrakturMaguntia&family=Fira+Code:wght@300;400;600&family=Mochiy+Pop+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&family=UnifrakturMaguntia&family=Fira+Code:wght@300;400;600&family=Mochiy+Pop+One&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  
   /* --- MODO GOTH (Padrão - Intocado) --- */
   :root {
     --bg-primary: #0f0505;
     --bg-secondary: #1a0b0b;
-    --text-primary: #E0E0E0;
+    --text-primary: #e0e0e0;
     --text-secondary: #a39ba8;
-    --accent: #D2042D;
+    --accent: #d2042d;
     --accent-hover: #ff4d6d;
     --scroll-track: #0f0505;
     --scroll-thumb: #520815;
     --spotlight-color: rgba(255, 255, 255, 0.15);
 
     /* VARIÁVEIS DE FONTE GOTH */
-    --font-heading: 'Inter', serif;
-    --font-body: 'Inter', sans-serif;
-    --font-code: 'Fira Code', monospace;
-    --font-special: 'UnifrakturMaguntia', cursive;
-    --font-titulo-zao: 'UnifrakturMaguntia', cursive;
-    --font-display: 'UnifrakturMaguntia', cursive;
+    --font-heading: "Inter", serif;
+    --font-body: "Inter", sans-serif;
+    --font-code: "Fira Code", monospace;
+    --font-special: "UnifrakturMaguntia", cursive;
+    --font-titulo-zao: "UnifrakturMaguntia", cursive;
+    --font-display: "UnifrakturMaguntia", cursive;
   }
 
   /* --- MODO KAWAII (PALETA MAKEUP / ROSE GOLD) --- */
   .kawaii {
     /* Fundo: Pale Pink (Nude Rosado) */
-    --bg-primary: #F1DFDD;
-    
+    --bg-primary: #f1dfdd;
+
     /* Cards */
     --bg-secondary: #ffffff;
-    
+
     /* Texto Principal: Brown Coffee  */
-    --text-primary: #4A202A; 
-    
+    --text-primary: #4a202a;
+
     /* Texto Secundário: Claret (Vinho) */
-    --text-secondary: #76172C;
-    
+    --text-secondary: #76172c;
+
     /* Destaque: Blush (Rosa Queimado) */
-    --accent: #D86487;
-    
+    --accent: #d86487;
+
     /* Hover: Claret (Vinho intenso) */
-    --accent-hover: #76172C;
-    
-    --scroll-track: #F1DFDD;
-    --scroll-thumb: #EEAAC3; /* Metallic Pink */
+    --accent-hover: #76172c;
+
+    --scroll-track: #f1dfdd;
+    --scroll-thumb: #eeaac3; /* Metallic Pink */
 
     --spotlight-color: rgba(255, 105, 180, 0.35);
 
     /* VARIÁVEIS DE FONTE KAWAII */
-    --font-heading: 'Mochiy Pop One', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --font-code: 'Space Mono', monospace;
-    --font-hero: 'Mochiy Pop One', sans-serif;
-    --font-titulo-zao: 'Mochiy Pop One', sans-serif;
-    --font-display: 'Mochiy Pop One', sans-serif;
+    --font-heading: "Mochiy Pop One", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-code: "Space Mono", monospace;
+    --font-hero: "Mochiy Pop One", sans-serif;
+    --font-titulo-zao: "Mochiy Pop One", sans-serif;
+    --font-display: "Mochiy Pop One", sans-serif;
   }
 
   /* 3. Aplicando estilos no corpo do site */
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: var(--font-body); 
+    font-family: var(--font-body);
     overflow-x: hidden;
     background-repeat: no-repeat;
-    background-attachment: fixed; 
+    background-attachment: fixed;
     min-height: 100vh;
-    
+
     /* FUNDO GOTH: Textura de Ruído */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
     background-blend-mode: overlay;
 
-    transition: background-color 0.5s ease, color 0.5s ease, background-image 0.5s ease;
+    transition:
+      background-color 0.5s ease,
+      color 0.5s ease,
+      background-image 0.5s ease;
   }
 
   /* FUNDO KAWAII: Vibe Soft Glam */
   body.kawaii {
     background-image: 
       /* Brilho Metallic Pink no topo */
-      radial-gradient(at 30% 20%, rgba(238, 170, 195, 0.5) 0px, transparent 60%),
-      
+      radial-gradient(
+        at 30% 20%,
+        rgba(238, 170, 195, 0.5) 0px,
+        transparent 60%
+      ),
       /* Brilho Blush suave embaixo */
-      radial-gradient(at 80% 80%, rgba(216, 100, 135, 0.3) 0px, transparent 60%),
-      
-      /* Base Pale Pink */
-      linear-gradient(to bottom, #F1DFDD, #fff0f5);
+        radial-gradient(
+          at 80% 80%,
+          rgba(216, 100, 135, 0.3) 0px,
+          transparent 60%
+        ),
+      /* Base Pale Pink */ linear-gradient(to bottom, #f1dfdd, #fff0f5);
     background-blend-mode: normal;
   }
 
   /* Cursors */
-  body:not(.kawaii) { cursor: crosshair; }
-  body.kawaii { cursor: default; }
+  body:not(.kawaii) {
+    cursor: crosshair;
+  }
+  body.kawaii {
+    cursor: default;
+  }
 
   /* UTILITIES DE FONTE */
-  .font-heading { font-family: var(--font-heading); }
-  .font-mono { font-family: var(--font-code); }
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-mono {
+    font-family: var(--font-code);
+  }
 }
 
 /* 4. Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--scroll-track); }
-::-webkit-scrollbar-thumb { 
-  background: var(--scroll-thumb); 
-  border-radius: 4px; 
+::-webkit-scrollbar {
+  width: 8px;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-hover); }
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
 
 /* 5. REGRAS DE TROCA DE FOTO */
-.foto-light { display: none; }
-.foto-dark { display: block; }
-body.kawaii .foto-light { display: block; }
-body.kawaii .foto-dark { display: none; }
+.foto-light {
+  display: none;
+}
+.foto-dark {
+  display: block;
+}
+body.kawaii .foto-light {
+  display: block;
+}
+body.kawaii .foto-dark {
+  display: none;
+}
 
 /* 6. EFEITO ADESIVO (STICKER - Padrão para os pets) */
 body.kawaii .sticker-effect {
-  filter: 
-    drop-shadow(4px 0 0 white) 
-    drop-shadow(-4px 0 0 white) 
-    drop-shadow(0 4px 0 white) 
-    drop-shadow(0 -4px 0 white) 
+  filter: drop-shadow(4px 0 0 white) drop-shadow(-4px 0 0 white)
+    drop-shadow(0 4px 0 white) drop-shadow(0 -4px 0 white)
     /* Sombra Blush suave (#D86487) */
-    drop-shadow(0 5px 15px rgba(216, 100, 135, 0.3)); 
+    drop-shadow(0 5px 15px rgba(216, 100, 135, 0.3));
 }
 
 /* 7. EFEITO ADESIVO HERO  */
 body.kawaii .sticker-effect-hero {
   filter: 
-    /* Camada 1: Grossura da borda branca */
-    drop-shadow(6px 0 0 white) 
-    drop-shadow(-6px 0 0 white) 
-    drop-shadow(0 6px 0 white) 
-    drop-shadow(0 -6px 0 white)
-    /* Camada 2: Preenchimento */
-    drop-shadow(3px 3px 0 white)
-    drop-shadow(-3px -3px 0 white)
+    /* Camada 1: Grossura da borda branca */ drop-shadow(
+      6px 0 0 white
+    )
+    drop-shadow(-6px 0 0 white) drop-shadow(0 6px 0 white)
+    drop-shadow(0 -6px 0 white) /* Camada 2: Preenchimento */
+    drop-shadow(3px 3px 0 white) drop-shadow(-3px -3px 0 white)
     /* Camada 3: Brilho METALLIC PINK (#EEAAC3) para dar um glow chique */
     drop-shadow(0 0 25px rgba(238, 170, 195, 0.9));
 }
@@ -155,7 +179,8 @@ body.kawaii .sticker-effect-hero {
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
   transition: transform 0.2s;
-  font-family: 'Comic Sans MS', 'Varela Round', sans-serif; /* Fonte arredondada */
+  font-family:
+    "Comic Sans MS", "Varela Round", sans-serif; /* Fonte arredondada */
 }
 
 /* Efeito Hover com animação */
@@ -166,8 +191,17 @@ body.kawaii .sticker-effect-hero {
 
 /* A animação Gelatina */
 @keyframes jelly {
-  0%, 100% { transform: scale(1, 1); }
-  25% { transform: scale(0.9, 1.1); }
-  50% { transform: scale(1.1, 0.9); }
-  75% { transform: scale(0.95, 1.05); }
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
 }

@@ -54,7 +54,7 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
       className={`relative transition-all duration-200 ease-out ${className}`}
     >
       <div style={{ transform: "translateZ(50px)" }} className="h-full">
-         {children}
+        {children}
       </div>
     </motion.div>
   );

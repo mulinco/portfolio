@@ -1,6 +1,6 @@
 // src/components/Iridescence.tsx
-import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
+import { useEffect, useRef } from "react";
 
 const vertexShader = `
 attribute vec2 uv;
@@ -45,14 +45,18 @@ interface IridescenceProps {
   amplitude?: number;
 }
 
-export const Iridescence = ({ color, speed = 1.0, amplitude = 0.1 }: IridescenceProps) => {
+export const Iridescence = ({
+  color,
+  speed = 1.0,
+  amplitude = 0.1,
+}: IridescenceProps) => {
   const ctnDom = useRef<HTMLDivElement>(null);
   const programRef = useRef<Program | null>(null);
 
   useEffect(() => {
     if (!ctnDom.current) return;
     const ctn = ctnDom.current;
-    
+
     // Restaurando antialias e removendo a trava de DPR
     const renderer = new Renderer({ alpha: true, antialias: true });
     const gl = renderer.gl;
@@ -64,11 +68,17 @@ export const Iridescence = ({ color, speed = 1.0, amplitude = 0.1 }: Iridescence
       uniforms: {
         uTime: { value: 0 },
         uColor: { value: new Color(...color) },
-        uResolution: { value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height) },
+        uResolution: {
+          value: new Color(
+            gl.canvas.width,
+            gl.canvas.height,
+            gl.canvas.width / gl.canvas.height,
+          ),
+        },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
         uAmplitude: { value: amplitude },
-        uSpeed: { value: speed }
-      }
+        uSpeed: { value: speed },
+      },
     });
 
     programRef.current = program;
@@ -78,7 +88,11 @@ export const Iridescence = ({ color, speed = 1.0, amplitude = 0.1 }: Iridescence
     const resize = () => {
       if (!ctn) return;
       renderer.setSize(ctn.offsetWidth, ctn.offsetHeight);
-      program.uniforms.uResolution.value.set(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height);
+      program.uniforms.uResolution.value.set(
+        gl.canvas.width,
+        gl.canvas.height,
+        gl.canvas.width / gl.canvas.height,
+      );
     };
 
     const update = (t: number) => {
@@ -87,24 +101,33 @@ export const Iridescence = ({ color, speed = 1.0, amplitude = 0.1 }: Iridescence
       renderer.render({ scene: mesh });
     };
 
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
     ctn.appendChild(gl.canvas);
     resize();
     animateId = requestAnimationFrame(update);
 
     return () => {
       cancelAnimationFrame(animateId);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
       if (ctn.contains(gl.canvas)) ctn.removeChild(gl.canvas);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }, []);
 
   useEffect(() => {
     if (programRef.current) {
-      programRef.current.uniforms.uColor.value.set(color[0], color[1], color[2]);
+      programRef.current.uniforms.uColor.value.set(
+        color[0],
+        color[1],
+        color[2],
+      );
     }
   }, [color]);
 
-  return <div ref={ctnDom} className="fixed inset-0 -z-50 pointer-events-none bg-transparent" />;
+  return (
+    <div
+      ref={ctnDom}
+      className="fixed inset-0 -z-50 pointer-events-none bg-transparent"
+    />
+  );
 };

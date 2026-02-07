@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export const useTypewriter = (textToType: string) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -13,12 +13,12 @@ export const useTypewriter = (textToType: string) => {
 
     if (!isDeleting && text === textToType) {
       timer = setTimeout(() => setIsDeleting(true), pauseEnd);
-    } else if (isDeleting && text === '') {
+    } else if (isDeleting && text === "") {
       timer = setTimeout(() => setIsDeleting(false), pauseStart);
     } else {
       const speed = isDeleting ? deletingSpeed : typingSpeed;
       timer = setTimeout(() => {
-        setText(current => {
+        setText((current) => {
           if (isDeleting) return textToType.substring(0, current.length - 1);
           return textToType.substring(0, current.length + 1);
         });

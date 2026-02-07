@@ -6,10 +6,10 @@ interface SpotlightCardProps {
   spotlightColor?: string;
 }
 
-export default function SpotlightCard({ 
-  children, 
-  className = "", 
-  spotlightColor = "rgba(255, 255, 255, 0.15)" // Cor padrão de fallback
+export default function SpotlightCard({
+  children,
+  className = "",
+  spotlightColor = "rgba(255, 255, 255, 0.15)", // Cor padrão de fallback
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -48,11 +48,9 @@ export default function SpotlightCard({
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
         }}
       />
-      
+
       {/* O Conteúdo do Card */}
-      <div className="relative h-full z-20">
-        {children}
-      </div>
+      <div className="relative h-full z-20">{children}</div>
     </div>
   );
 }
