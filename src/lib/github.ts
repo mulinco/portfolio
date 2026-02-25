@@ -1,5 +1,3 @@
-// src/lib/github.ts
-
 export interface GithubRepo {
   id: number;
   name: string;
@@ -16,7 +14,7 @@ export async function fetchGithubProjects(
   username: string,
 ): Promise<GithubRepo[]> {
   const response = await fetch(
-    `https://api.github.com/users/${username}/repos?sort=updated&per_page=12`,
+    `https://api.github.com/users/${username}/repos?sort=updated&per_page=30`, 
   );
 
   if (!response.ok) {
@@ -25,5 +23,8 @@ export async function fetchGithubProjects(
 
   const data: GithubRepo[] = await response.json();
 
-  return data.filter((repo) => !repo.fork);
+  // Filtro: Não pode ser fork E precisa ter a tag 'portfolio' nos topics
+  return data.filter((repo) => 
+    !repo.fork && repo.topics.includes("portfolio")
+  );
 }

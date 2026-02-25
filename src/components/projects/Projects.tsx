@@ -18,59 +18,6 @@ interface Project {
   type: "Frontend" | "Backend" | "Data Science" | "Full Stack" | "Bioinformatics";
 }
 
-const STATIC_PROJECTS: Project[] = [
-  {
-    title: "Netflix Genre Analysis",
-    type: "Data Science",
-    shortDescription: "Análise exploratória de dados sobre tendências de gêneros e evolução das séries.",
-    longDescription: "Um estudo profundo utilizando Pandas e Matplotlib para entender a evolução dos gêneros de filmes e séries na plataforma Netflix ao longo das décadas.",
-    techs: ["Python", "Pandas", "Matplotlib", "Data Viz"],
-    image: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=800&auto=format&fit=crop",
-    github: "https://github.com/mulinco/analysis-genre-netflix",
-    demo: "https://analysis-genre-netflix.streamlit.app/",
-  },
-  {
-    title: "EduTech Backend",
-    type: "Backend",
-    shortDescription: "API e modelagem de dados para plataforma educacional robusta.",
-    longDescription: "Arquitetura de banco de dados, normalização e endpoints seguros para gerenciamento de alunos e cursos.",
-    techs: ["Python", "SQL", "PostgreSQL", "API Rest"],
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
-    github: "https://github.com/mulinco/edutech",
-    demo: "https://github.com/mulinco/edutech",
-  },
-  {
-    title: "PDF Extractor Tool",
-    type: "Full Stack",
-    shortDescription: "Automação para extração de dados de PDFs com exportação estruturada.",
-    longDescription: "Aplicação Streamlit que automatiza a leitura de PDFs e exportação de dados para problemas administrativos reais.",
-    techs: ["Python", "Streamlit", "Automation", "Regex"],
-    image: "https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=800&auto=format&fit=crop",
-    github: "https://github.com/mulinco/extrator-pdf-streamlit",
-    demo: "https://extrator-pdf-aero.streamlit.app/",
-  },
-  {
-    title: "Instituto Consuelo",
-    type: "Frontend",
-    shortDescription: "Interface moderna para ONG de impacto social.",
-    longDescription: "Plataforma EAD com foco em acessibilidade e responsividade para conectar doadores e beneficiários.",
-    techs: ["React", "TypeScript", "Tailwind CSS", "UX/UI"],
-    image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop",
-    github: "https://github.com/Edutech-Instituto-Consuelo/frontend",
-    demo: "https://plataforma-instituto-consuelo.vercel.app/",
-  },
-  {
-    title: "Meu Portfólio",
-    type: "Frontend",
-    shortDescription: "Showcase interativo com temas dinâmicos Goth/Kawaii.",
-    longDescription: "Aplicação React completa com temas dinâmicos, animações Canvas e arquitetura modular de alta performance.",
-    techs: ["React", "Vite", "Tailwind", "Framer Motion"],
-    image: "https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=800&auto=format&fit=crop",
-    github: "https://github.com/mulinco/portfolio",
-    demo: "https://mulincodev.vercel.app",
-  },
-];
-
 interface ProjectsProps {
   isStarted: boolean;
   isKawaii: boolean;
@@ -95,7 +42,8 @@ const cardVariants: Variants = {
 };
 
 export const Projects = ({ isStarted, isKawaii: propIsKawaii }: ProjectsProps) => {
-  const [projects, setProjects] = useState<Project[]>(STATIC_PROJECTS);
+  // Inicializa com array vazio agora que não temos projetos estáticos
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentIsKawaii, setCurrentIsKawaii] = useState(propIsKawaii);
@@ -123,7 +71,6 @@ export const Projects = ({ isStarted, isKawaii: propIsKawaii }: ProjectsProps) =
           }`;
           const rawSanity = await client.fetch<Project[]>(sanityQuery);
           
-          // Limpeza dos dados do Sanity para evitar nulos
           sanityData = rawSanity.map(proj => ({
             ...proj,
             techs: proj.techs || [],
@@ -158,7 +105,8 @@ export const Projects = ({ isStarted, isKawaii: propIsKawaii }: ProjectsProps) =
           console.error("Erro GitHub:", err);
         }
 
-        const allProjects = [...sanityData, ...mappedGithub, ...STATIC_PROJECTS];
+        // Combina apenas os dados dinâmicos
+        const allProjects = [...sanityData, ...mappedGithub];
         
         // Remove duplicatas pelo título
         const uniqueProjects = allProjects.filter(
@@ -226,7 +174,6 @@ export const Projects = ({ isStarted, isKawaii: propIsKawaii }: ProjectsProps) =
                     </p>
                   </div>
 
-                  {/* CORREÇÃO DO SLICE AQUI */}
                   <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-accent/5" style={{ transform: "translateZ(20px)" }}>
                     {(project.techs || []).slice(0, 3).map((tech, i) => (
                       <span key={i} className="text-[10px] font-code text-accent font-bold bg-accent/5 px-2 py-1 rounded border border-accent/10">
