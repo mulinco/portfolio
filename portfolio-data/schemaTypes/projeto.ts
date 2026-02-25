@@ -22,7 +22,6 @@ export default defineType({
           {title: 'Backend', value: 'Backend'},
           {title: 'Data Science', value: 'Data Science'},
           {title: 'Full Stack', value: 'Full Stack'},
-          // Adicionei Bioinformática como opção extra, caso queira usar no futuro
           {title: 'Bioinformatics', value: 'Bioinformatics'},
         ],
       },
