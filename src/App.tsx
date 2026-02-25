@@ -74,7 +74,7 @@ function App() {
           <Hero isStarted={isSystemReady} />
           <About isKawaii={isKawaii} isStarted={isSystemReady} />
           <LifeTimeline isKawaii={isKawaii} isStarted={isSystemReady} />
-          <Projects isStarted={isSystemReady} />
+          <Projects isStarted={isSystemReady} isKawaii={true} />
           <PetSlider isKawaii={isKawaii} isStarted={isSystemReady} />
           <Footer isKawaii={isKawaii} />
         </div>
