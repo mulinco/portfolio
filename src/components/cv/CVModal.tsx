@@ -9,6 +9,7 @@ import {
   FaGraduationCap,
   FaCode,
   FaUser,
+  FaRocket,
 } from "react-icons/fa";
 
 interface CVModalProps {
@@ -31,35 +32,62 @@ export const CVModal = ({ isOpen, onClose }: CVModalProps) => {
       "Profissional em transição de carreira para a área de Tecnologia, combinando a bagagem analítica e de pesquisa das Ciências Biológicas (UFRJ) com a formação técnica em Análise e Desenvolvimento de Sistemas. Experiência prática em projetos Full Stack utilizando React, Python e SQL.",
     skills: [
       "React.js",
+      "Next.js",
       "TypeScript",
       "Tailwind CSS",
+      "GSAP",
       "Python",
       "PostgreSQL",
       "Git/GitHub",
+      "Vercel",
+      "Cloudflare",
+      "Resend / Formspree",
       "Data Analysis",
       "Bioinformática",
     ],
     experience: [
       {
-        role: "Desenvolvedora Backend",
-        company: "EduTech (Projeto Acadêmico)",
-        period: "2025",
+        role: "Co-fundadora & Eng. de Software Fullstack",
+        company: "Ponira Lab",
+        period: "Dez 2025 - Presente",
         description:
-          "Arquitetura de dados e infraestrutura para sistema de gestão educacional.",
+          "Liderança técnica atuando no desenvolvimento de soluções digitais ponta a ponta. Abordagem unindo a agilidade do ecossistema front-end moderno com o poder analítico do Python para processamento de dados e automação.",
         details: [
-          "Modelagem de banco de dados relacional (PostgreSQL).",
-          "Scripts de automação em Python para limpeza de dados.",
-          "Criação de APIs RESTful para consumo do front-end.",
+          "Criação de soluções de backend e scripts focados em eficiência e integração de sistemas.",
+          "Planejamento estratégico de infraestrutura e arquitetura de dados e serviços cloud (Cloudflare, Vercel).",
+        ],
+      },
+    ],
+    projects: [
+      {
+        name: "Portal Institucional Ponira Lab",
+        stack: "Next.js, TypeScript, GSAP, Cloudflare, Vercel",
+        description:
+          "Desenvolvimento completo do site da agência focado em alta conversão e UX imersiva.",
+        details: [
+          "Configurações avançadas de rede na Cloudflare, compra e alocação de domínios, subdomínios e configuração de roteamento de emails.",
+          "Implementação de interfaces de alta performance utilizando bibliotecas modernas como Tailwind CSS e GSAP.",
+          "Planejamento estrutural para integração futura com banco de dados e CMS de forma escalável.",
         ],
       },
       {
-        role: "Desenvolvedora Front-end",
-        company: "Instituto Consuelo (EduTech)",
-        period: "2025",
+        name: "Backend EduTech (Projeto Acadêmico)",
+        stack: "Python, PostgreSQL",
+        description:
+          "Arquitetura de dados e infraestrutura para sistema de gestão educacional.",
+        details: [
+          "Modelagem de banco de dados relacional.",
+          "Scripts de automação em Python para limpeza de dados.",
+          "Criação de APIs RESTful estruturadas.",
+        ],
+      },
+      {
+        name: "Frontend Instituto Consuelo",
+        stack: "React, Tailwind CSS",
         description: "Interface web responsiva para plataforma de ensino.",
         details: [
           "Desenvolvimento de componentes modulares com React.",
-          "Estilização moderna e responsiva via Tailwind CSS.",
+          "Estilização moderna e responsiva focada na experiência do aluno.",
           "Implementação de dashboards para visualização de métricas.",
         ],
       },
@@ -137,7 +165,7 @@ export const CVModal = ({ isOpen, onClose }: CVModalProps) => {
           {/* Experiência */}
           <section>
             <div className="flex items-center gap-2 mb-4 text-accent font-bold font-heading text-xl">
-              <FaBriefcase /> <span>Projetos & Experiência</span>
+              <FaBriefcase /> <span>Experiência Profissional</span>
             </div>
             <div className="space-y-4">
               {cvData.experience.map((job, index) => (
@@ -165,6 +193,41 @@ export const CVModal = ({ isOpen, onClose }: CVModalProps) => {
                   </p>
                   <ul className="list-disc list-inside text-xs text-text-secondary space-y-1 font-code">
                     {job.details.map((detail, idx) => (
+                      <li key={idx}>{detail}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Projetos */}
+          <section>
+            <div className="flex items-center gap-2 mb-4 text-accent font-bold font-heading text-xl">
+              <FaRocket /> <span>Projetos em Destaque</span>
+            </div>
+            <div className="space-y-4">
+              {cvData.projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="
+                  p-5 rounded-lg transition-all
+                  bg-bg-primary border border-accent/10 hover:border-accent/40
+                "
+                >
+                  <div className="flex justify-between flex-wrap gap-2 mb-2">
+                    <h3 className="font-bold text-text-primary font-heading tracking-wide">
+                      {project.name}
+                    </h3>
+                  </div>
+                  <h4 className="text-xs text-accent font-mono mb-2 tracking-wide break-words">
+                    {project.stack}
+                  </h4>
+                  <p className="text-sm text-text-primary mb-3 font-sans">
+                    {project.description}
+                  </p>
+                  <ul className="list-disc list-inside text-xs text-text-secondary space-y-1 font-code">
+                    {project.details.map((detail, idx) => (
                       <li key={idx}>{detail}</li>
                     ))}
                   </ul>
@@ -224,19 +287,23 @@ export const CVModal = ({ isOpen, onClose }: CVModalProps) => {
           {/* Social Links */}
           <div className="flex gap-4 text-2xl text-text-secondary">
             <a
-              href="#"
+              href="https://linkedin.com/in/mariaclararodrigues3113"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-accent hover:scale-110 transition-all"
             >
               <FaLinkedin />
             </a>
             <a
-              href="#"
+              href="https://github.com/mulinco"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-accent hover:scale-110 transition-all"
             >
               <FaGithub />
             </a>
             <a
-              href="#"
+              href="mailto:mulincorod@gmail.com"
               className="hover:text-accent hover:scale-110 transition-all"
             >
               <FaEnvelope />

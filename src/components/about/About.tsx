@@ -3,6 +3,7 @@ import {
   Code,
   Database,
   Layout,
+  Layers,
   Sparkles,
   X,
   Bot,
@@ -111,6 +112,15 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
       techs: ["Hooks", "Vite", "Context API", "Tailwind"],
     },
     {
+      name: "Next.js",
+      icon: <Layers />,
+      level: "Prático",
+      percentage: "65%",
+      description:
+        "Desenvolvimento de aplicações web completas, escaláveis e de alta performance.",
+      techs: ["App Router", "SSR/SSG", "Server Actions", "SEO"],
+    },
+    {
       name: "Tailwind",
       icon: <Sparkles />,
       level: "Prático",
@@ -177,7 +187,7 @@ export const About = ({ isKawaii: propIsKawaii, isStarted }: AboutProps) => {
   if (!isStarted) return null;
 
   return (
-    <section className="relative py-20 overflow-hidden font-sans">
+    <section id="skills" className="relative py-20 overflow-hidden font-sans">
       {/* Texto Decorativo de Fundo */}
       <div className="absolute top-10 left-0 w-full overflow-hidden leading-none select-none opacity-[0.03] pointer-events-none">
         <span

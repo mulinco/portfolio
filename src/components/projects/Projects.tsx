@@ -109,9 +109,42 @@ export const Projects = ({ isStarted, isKawaii: propIsKawaii }: ProjectsProps) =
         const allProjects = [...sanityData, ...mappedGithub];
         
         // Remove duplicatas pelo título
-        const uniqueProjects = allProjects.filter(
+        let uniqueProjects = allProjects.filter(
           (proj, index, self) => index === self.findIndex((p) => p.title === proj.title)
         );
+
+        // Fallback projects in case API fails (e.g., GitHub rate limit after refresh)
+        if (uniqueProjects.length === 0) {
+          uniqueProjects = [
+            {
+              title: "Portal Institucional Ponira Lab",
+              type: "Frontend",
+              shortDescription: "Desenvolvimento completo do site da agência focado em alta conversão e UX imersiva.",
+              longDescription: "Configurações avançadas de rede na Cloudflare, compra e alocação de domínios, subdomínios e configuração de roteamento de emails. Implementação de interfaces de alta performance utilizando Tailwind CSS e GSAP.",
+              techs: ["Next.js", "TypeScript", "GSAP", "Cloudflare", "Vercel"],
+              image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
+              github: "https://github.com/mulinco",
+            },
+            {
+              title: "Backend EduTech",
+              type: "Backend",
+              shortDescription: "Arquitetura de dados e infraestrutura para sistema de gestão educacional.",
+              longDescription: "Modelagem de banco de dados relacional. Scripts de automação em Python para limpeza de dados. Criação de APIs RESTful estruturadas.",
+              techs: ["Python", "PostgreSQL", "APIs RESTful"],
+              image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
+              github: "https://github.com/mulinco",
+            },
+            {
+              title: "Frontend Instituto Consuelo",
+              type: "Frontend",
+              shortDescription: "Interface web responsiva para plataforma de ensino.",
+              longDescription: "Desenvolvimento de componentes modulares com React. Estilização moderna e responsiva focada na experiência do aluno.",
+              techs: ["React", "Tailwind CSS"],
+              image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
+              github: "https://github.com/mulinco",
+            }
+          ];
+        }
 
         setProjects(uniqueProjects);
       } catch (error) {
@@ -154,7 +187,7 @@ export const Projects = ({ isStarted, isKawaii: propIsKawaii }: ProjectsProps) =
         {projects.map((project, index) => (
           <motion.div key={`${project.title}-${index}`} variants={cardVariants} className="h-full">
             <TiltCard className="h-full">
-              <GenericCard isKawaii={currentIsKawaii} onClick={() => setSelectedProject(project)} className="h-full">
+              <GenericCard isKawaii={currentIsKawaii} onClick={() => setSelectedProject(project)} className="h-full" disableElectricity={true}>
                 <div className="flex flex-col h-full group">
                   <div className="flex justify-between items-start mb-6" style={{ transform: "translateZ(20px)" }}>
                     <div className="p-3 bg-black/10 rounded-lg text-accent group-hover:scale-110 transition-transform">

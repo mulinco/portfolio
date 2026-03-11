@@ -31,6 +31,7 @@ export const Footer = ({ isKawaii }: FooterProps) => {
 
   return (
     <footer
+      id="contato"
       className={`
       relative mt-20 pt-16 pb-8 px-6 overflow-hidden
       border-t transition-all duration-500 backdrop-blur-md

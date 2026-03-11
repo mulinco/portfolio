@@ -6,6 +6,7 @@ interface GenericCardProps {
   isKawaii: boolean;
   onClick?: () => void;
   className?: string;
+  disableElectricity?: boolean;
 }
 
 export const GenericCard = ({
@@ -14,6 +15,7 @@ export const GenericCard = ({
   isKawaii,
   onClick,
   className = "",
+  disableElectricity = false,
 }: GenericCardProps) => {
   // Configuração centralizada de estilo
   const config = {
@@ -22,6 +24,32 @@ export const GenericCard = ({
     radius: isKawaii ? 40 : 0,
   };
 
+  const cardContent = (
+    <div
+      onClick={onClick}
+      className={`relative overflow-visible group h-full w-full p-6 flex flex-col backdrop-blur-md border-2 transition-all duration-500 cursor-pointer ${className}
+      ${
+        isKawaii
+          ? "bg-white/80 border-[#39FF14]/20 rounded-[2.5rem] shadow-lg"
+          : "bg-black/60 border-accent/20 rounded-none shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+      }`}
+    >
+      {title && (
+        <h3
+          className={`text-xl mb-4 ${isKawaii ? "text-pink-500 font-cute" : "text-accent font-bold"}`}
+        >
+          {title}
+        </h3>
+      )}
+      {/* O children aqui dentro será esticado pelo flex-col do pai se necessário */}
+      <div className="flex flex-col h-full">{children}</div>
+    </div>
+  );
+
+  if (disableElectricity) {
+    return cardContent;
+  }
+
   return (
     <ElectricBorder
       color={config.color}
@@ -29,25 +57,7 @@ export const GenericCard = ({
       chaos={config.chaos}
       className={`h-full ${className}`}
     >
-      <div
-        onClick={onClick}
-        className={`h-full w-full p-6 flex flex-col backdrop-blur-md border-2 transition-all duration-500 cursor-pointer
-        ${
-          isKawaii
-            ? "bg-white/80 border-[#39FF14]/20 rounded-[2.5rem] shadow-lg"
-            : "bg-black/60 border-accent/20 rounded-none shadow-[0_0_20px_rgba(0,0,0,0.5)]"
-        }`}
-      >
-        {title && (
-          <h3
-            className={`text-xl mb-4 ${isKawaii ? "text-pink-500 font-cute" : "text-accent font-bold"}`}
-          >
-            {title}
-          </h3>
-        )}
-        {/* O children aqui dentro será esticado pelo flex-col do pai se necessário */}
-        <div className="flex flex-col h-full">{children}</div>
-      </div>
+      {cardContent}
     </ElectricBorder>
   );
 };
